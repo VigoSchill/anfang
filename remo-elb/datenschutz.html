@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Datenschutz – REMO Elb</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#f2f0eb">
+<meta name="theme-color" content="#ffffff">
 <style>
-  @font-face { font-family: "Archivo"; font-style: normal; font-weight: 100 900; font-stretch: 62% 125%; font-display: swap;
-    src: url("fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations"), url("fonts/archivo-latin-wdth-normal.woff2") format("woff2"); }
-  :root { --bg: #f2f0eb; --ink: #1c2427; --muted: #535d61; --line: #d3cec4; --accent: #24453f; --mark: #9a6a3c; --gutter: clamp(1rem, 5vw, 3rem); }
+  @font-face { font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap;
+    src: url("fonts/fraunces-latin-opsz-normal.woff2") format("woff2-variations"), url("fonts/fraunces-latin-opsz-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Hanken Grotesk"; font-style: normal; font-weight: 100 900; font-display: swap;
+    src: url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2-variations"), url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2"); }
+  :root { --bg: #ffffff; --ink: #111317; --muted: #595e66; --line: #e2e4e8; --accent: #1b3a8c; --mark: #1b3a8c; --gutter: clamp(1rem, 5vw, 3rem); }
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-size: 1.0625rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif; font-size: 1.0625rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
   ::selection { background: var(--accent); color: var(--bg); }
   a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1px; }
   :focus-visible { outline: 2px solid var(--mark); outline-offset: 3px; border-radius: 2px; }
@@ -20,13 +22,13 @@
   .wrap { max-width: 44rem; margin: 0 auto; padding: 0 var(--gutter); }
   header { border-bottom: 1px solid var(--line); }
   header .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 4rem; gap: 1rem; }
-  .brand { text-decoration: none; font-weight: 750; font-stretch: 112%; font-size: 1.2rem; letter-spacing: .06em; }
+  .brand { text-decoration: none; font-weight: 700; font-size: 1.0625rem; letter-spacing: .14em; }
   main { padding: clamp(2.5rem, 8vw, 4.5rem) 0 4rem; }
-  h1 { font-size: clamp(2.2rem, 8vw, 3rem); font-weight: 650; font-stretch: 88%; letter-spacing: -0.015em; line-height: 1.08; margin: 0 0 1.5rem; }
-  h2 { font-size: 1.25rem; font-weight: 620; font-stretch: 95%; margin: 2.25rem 0 .5rem; }
+  h1 { font-family: "Fraunces", Georgia, serif; font-variation-settings: "opsz" 48; font-size: clamp(2.4rem, 9vw, 3.4rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 1.5rem; }
+  h2 { font-size: 1.1875rem; font-weight: 600; margin: 2.25rem 0 .5rem; }
   p { margin: 0 0 1em; }
   .note { color: var(--muted); }
-  .placeholder { font-weight: 600; color: var(--mark); background: color-mix(in srgb, var(--mark) 10%, transparent); padding: 0 .3em; border-radius: 2px; }
+  .placeholder { font-weight: 600; color: var(--mark); background: #edf0f7; padding: 0 .3em; border-radius: 2px; }
   footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; font-size: .875rem; color: var(--muted); }
   footer .wrap { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
 </style>
