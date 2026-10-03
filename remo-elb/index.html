@@ -275,34 +275,29 @@
     .phone-big:hover { text-decoration: none; }
     .phone-big { background: linear-gradient(currentColor, currentColor) left 100% / 0 2px no-repeat; transition: background-size .5s var(--ease); padding-bottom: .1em; }
     .phone-big:hover, .phone-big:focus-visible { background-size: 100% 2px; }
-
-    /* Abschnitte blenden beim Scrollen ein (CSS Scroll-Driven Animations).
-       Browser ohne Unterstützung zeigen die Inhalte einfach sofort. */
-    @supports (animation-timeline: view()) {
-      section:not(.hero) h2,
-      .section-intro,
-      .service,
-      .steps li,
-      .about-text,
-      .facts,
-      .ref,
-      .voices,
-      .contact-grid > div {
-        animation: reveal linear both;
-        animation-timeline: view();
-        animation-range: entry 0% entry 40%;
-      }
-      /* Nebeneinanderliegende Elemente leicht versetzt */
-      .service:nth-child(even), .ref:nth-child(2), .steps li:nth-child(2), .contact-grid > div:nth-child(2) { animation-range: entry 8% entry 48%; }
-      .ref:nth-child(3), .steps li:nth-child(3), .contact-grid > div:nth-child(3) { animation-range: entry 16% entry 56%; }
-      .steps li:nth-child(4) { animation-range: entry 24% entry 64%; }
-      @keyframes reveal {
-        from { opacity: 0; transform: translateY(18px); animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
-        to   { opacity: 1; transform: none; }
-      }
-    }
   }
+
+  /* Einblenden beim Scrollen (IntersectionObserver, Script am Seitenende).
+     Die Klasse .reveal setzt nur das Script – ohne JavaScript oder bei
+     reduzierter Bewegung bleibt alles sofort sichtbar. */
+  .reveal [data-reveal]:not(.is-in) { opacity: 0; }
+  .reveal [data-reveal].is-in { animation: reveal .7s cubic-bezier(.16, 1, .3, 1) var(--reveal-delay, 0s) backwards; }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal [data-reveal]:not(.is-in) { opacity: 1; }
+    .reveal [data-reveal].is-in { animation: none; }
+  }
+  @media print { .reveal [data-reveal] { opacity: 1 !important; animation: none !important; } }
 </style>
+<script>
+  // Früh setzen, damit nichts aufblitzt: nur mit Observer-Support und ohne reduzierte Bewegung
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reveal');
+  }
+</script>
 </head>
 <body>
 
@@ -542,5 +537,42 @@
   </div>
 </footer>
 
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('reveal')) return;
+
+    var targets = document.querySelectorAll(
+      'section:not(.hero) h2, .section-intro, .service, .steps li, .about-text, .facts, .ref, .voices, .contact-grid > div'
+    );
+    for (var i = 0; i < targets.length; i++) targets[i].setAttribute('data-reveal', '');
+
+    var STAGGER = 0.09; // Sekunden zwischen Elementen derselben Zeile
+
+    var io = new IntersectionObserver(function (entries) {
+      var visible = entries.filter(function (e) { return e.isIntersecting; });
+      // Von oben nach unten, links nach rechts – Elemente einer Zeile erhalten steigende Verzögerung
+      visible.sort(function (a, b) {
+        return (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left);
+      });
+      var rowTop = null, index = 0;
+      visible.forEach(function (entry) {
+        var top = entry.boundingClientRect.top;
+        if (rowTop === null || Math.abs(top - rowTop) > 8) { rowTop = top; index = 0; }
+        entry.target.style.setProperty('--reveal-delay', Math.min(index, 3) * STAGGER + 's');
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+        index++;
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
+
+    // Wechselt der Nutzer zu „Bewegung reduzieren“, alles sofort zeigen
+    var mq = matchMedia('(prefers-reduced-motion: reduce)');
+    var showAll = function () { if (mq.matches) { io.disconnect(); root.classList.remove('reveal'); } };
+    if (mq.addEventListener) mq.addEventListener('change', showAll);
+  })();
+</script>
 </body>
 </html>
