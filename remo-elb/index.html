@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REMO Elb – Maler, Lackierer, Tapezierer, Trockenbau in Wedel</title>
+<meta name="description" content="REMO Elb – Maler, Lackierer, Tapezierer und Trockenbau in Wedel. Bauphysikalische Instandsetzung und Substanzerhalt von Privatimmobilien in Wedel und den Hamburger Elbvororten.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<style>
+  /* Schriften lokal eingebunden – keine Verbindung zu externen Servern */
+  @font-face {
+    font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap;
+    src: url("fonts/fraunces-latin-opsz-normal.woff2") format("woff2-variations"),
+         url("fonts/fraunces-latin-opsz-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Fraunces"; font-style: italic; font-weight: 100 900; font-display: swap;
+    src: url("fonts/fraunces-latin-opsz-italic.woff2") format("woff2-variations"),
+         url("fonts/fraunces-latin-opsz-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Hanken Grotesk"; font-style: normal; font-weight: 100 900; font-display: swap;
+    src: url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2-variations"),
+         url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");
+  }
+
+  :root {
+    --bg: #ffffff;           /* frisch gestrichene Wand */
+    --ink: #111317;
+    --muted: #595e66;
+    --line: #e2e4e8;
+    --accent: #1b3a8c;       /* Tiefblau – einziger Akzent */
+    --accent-hover: #142d6e;
+    --accent-ink: #ffffff;
+    --accent-soft: #c9d3ee;
+    --tint: #edf0f7;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --wrap: 80rem;
+    --gutter: clamp(1.25rem, 5vw, 4rem);
+    --section: clamp(5rem, 13vw, 10rem);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1rem; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+  p { margin: 0 0 1em; }
+  p:last-child { margin-bottom: 0; }
+  h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+  h1, h2, h3 { font-family: var(--serif); font-variation-settings: "opsz" 48; }
+
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  @media (min-width: 60rem) {
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1.25rem, 2.5vw, 2.5rem); }
+  }
+
+  .placeholder {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 600;
+    font-size: .875em;
+    color: var(--accent);
+    background: var(--tint);
+    padding: .05em .35em;
+    white-space: nowrap;
+  }
+
+  /* Entwurfs-Hinweis */
+  .draft-bar {
+    background: var(--ink); color: #fff;
+    font-size: .8125rem; line-height: 1.4; text-align: center;
+    padding: .5rem var(--gutter);
+  }
+
+  /* Kopf */
+  .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.5rem; }
+  .site-head { border-bottom: 1px solid var(--line); }
+  .brand { text-decoration: none; font-weight: 700; font-size: 1rem; letter-spacing: .16em; }
+  .head-call { font-weight: 600; text-decoration: none; white-space: nowrap; font-size: .9375rem; }
+  .site-nav { display: none; }
+  @media (min-width: 60rem) {
+    .site-nav { display: flex; gap: 2rem; font-size: .9375rem; margin-left: auto; margin-right: 1rem; }
+    .site-nav a { text-decoration: none; color: var(--muted); transition: color .2s; padding: .25rem 0;
+      background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; }
+    .site-nav a:hover { color: var(--ink); background-size: 100% 1px; }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .65rem;
+    min-height: 3.25rem; padding: .8rem 1.6rem;
+    background: var(--accent); color: var(--accent-ink);
+    font: inherit; font-weight: 600; font-size: 1rem; text-decoration: none;
+    transition: background-color .2s, color .2s;
+    user-select: none;
+  }
+  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
+  .btn:hover { background: var(--accent-hover); }
+  .btn-line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .btn-line:hover, .btn-line:active { background: var(--ink); color: #fff; }
+
+  /* Start */
+  .hero { padding: clamp(3rem, 9vw, 6.5rem) 0 0; }
+  .hero h1 {
+    grid-column: 1 / span 11;
+    font-size: clamp(2.6rem, 9.4vw, 6.25rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+  .hero h1 em { font-weight: 380; color: var(--accent); }
+  .hero-side { grid-column: 7 / span 5; margin-top: clamp(2rem, 5vw, 3rem); }
+  .hero-side p { font-size: clamp(1.0625rem, 2.6vw, 1.1875rem); line-height: 1.6; max-width: 38ch; margin-bottom: 2rem; }
+  .hero-side strong { font-weight: 600; }
+
+  /* Faktenleiste */
+  .facts-bar {
+    list-style: none; padding: 0; margin: clamp(3.5rem, 9vw, 6.5rem) 0 0;
+    display: grid; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line);
+  }
+  .facts-bar li { display: flex; align-items: center; gap: .7rem; padding: 1.05rem 0; font-size: .9375rem; }
+  .facts-bar li + li { border-top: 1px solid var(--line); }
+  @media (min-width: 44rem) {
+    .facts-bar { grid-template-columns: repeat(3, auto); justify-content: space-between; }
+    .facts-bar li + li { border-top: 0; }
+  }
+  .stars { display: inline-flex; gap: 2px; color: var(--accent); flex: none; }
+  .stars svg { width: .9rem; height: .9rem; }
+
+  /* Abschnitte */
+  section { padding: var(--section) 0 0; }
+  h2 {
+    font-size: clamp(2.6rem, 7.5vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .sec-head { margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+
+  /* Leistungen */
+  #leistungen .sec-head { grid-column: 1 / span 4; }
+  .services { grid-column: 6 / span 7; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .services li { padding: clamp(1.5rem, 3.5vw, 2.25rem) 0; border-bottom: 1px solid var(--line); display: grid; gap: .5rem; }
+  @media (min-width: 44rem) { .services li { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: baseline; } }
+  .services h3 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.05; }
+  .services p { color: var(--muted); max-width: 36ch; }
+
+  /* Arbeitsweise */
+  #arbeitsweise h2 { grid-column: 1 / span 8; }
+  .method-lead { grid-column: 1 / span 7; font-family: var(--serif); font-variation-settings: "opsz" 36; font-size: clamp(1.4rem, 3.4vw, 2rem); line-height: 1.3; letter-spacing: -0.015em; font-weight: 400; margin: clamp(1.75rem, 4vw, 2.75rem) 0 0; }
+  .method-text { grid-column: 5 / span 8; margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+  @media (min-width: 44rem) { .method-text { columns: 2; column-gap: clamp(1.75rem, 4vw, 3rem); } }
+  .method-text p { break-inside: avoid; color: var(--muted); }
+  .method-text strong { color: var(--ink); font-weight: 600; }
+
+  /* Über mich */
+  #ueber-mich .sec-head { grid-column: 1 / span 4; }
+  .about-text { grid-column: 6 / span 7; }
+  .about-text .about-lead { font-family: var(--serif); font-variation-settings: "opsz" 36; font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.25; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 1.5em; }
+  .about-text p:not(.about-lead) { max-width: 60ch; }
+  .signature { margin-top: 2rem; color: var(--muted); font-size: .9375rem; }
+  .facts { list-style: none; margin: 2.5rem 0 0; padding: 0; border-top: 1px solid var(--ink); font-size: .9375rem; }
+  .facts li { display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); }
+  .facts span:first-child { color: var(--muted); }
+  .facts span:last-child { text-align: right; }
+
+  /* Referenzen */
+  #referenzen .sec-head, #kundenstimmen .sec-head { grid-column: 1 / span 6; }
+  .refs { display: grid; gap: clamp(1.25rem, 2.5vw, 2.5rem); }
+  @media (min-width: 44rem) {
+    .refs { grid-template-columns: 7fr 5fr; }
+    .ref:first-child { grid-row: span 2; }
+    .ref:first-child .ref-field { aspect-ratio: auto; min-height: 20rem; }
+  }
+  .ref { margin: 0; display: flex; flex-direction: column; }
+  .ref-field { aspect-ratio: 3 / 2; background: var(--tint); display: flex; align-items: flex-end; padding: 1rem 1.15rem; color: var(--accent); font-size: .875rem; font-weight: 500; flex: 1; }
+  .ref:nth-child(2) .ref-field { background: #e3e8f3; }
+  .ref:nth-child(3) .ref-field { background: #f3f4f7; }
+  .ref figcaption { margin-top: .75rem; font-size: .875rem; color: var(--muted); }
+
+  /* Kundenstimmen */
+  .reviews { display: grid; gap: 2.5rem; border-top: 1px solid var(--ink); padding-top: clamp(2rem, 4vw, 2.75rem); }
+  @media (min-width: 52rem) { .reviews { grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 4vw, 3.5rem); } }
+  .review { margin: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+  .review blockquote { margin: 0; }
+  .review blockquote p { font-family: var(--serif); font-variation-settings: "opsz" 36; font-weight: 400; font-size: clamp(1.4rem, 3vw, 1.75rem); line-height: 1.3; letter-spacing: -0.015em; }
+  .review blockquote p::before { content: "„"; }
+  .review blockquote p::after { content: "“"; }
+  .review figcaption { font-size: .875rem; color: var(--muted); }
+  .reviews-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: clamp(2.5rem, 6vw, 4rem); }
+  .reviews-foot p { margin: 0; color: var(--muted); font-size: .9375rem; }
+
+  /* Kontakt */
+  .contact { background: var(--accent); color: #fff; margin-top: var(--section); padding-bottom: clamp(4rem, 10vw, 7rem); }
+  .contact h2 { grid-column: 1 / span 6; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .contact-phone { grid-column: 1 / span 7; }
+  .contact-meta { grid-column: 8 / span 5; display: grid; gap: 2rem; align-content: start; }
+  .contact h3 { font-family: var(--sans); font-size: .875rem; font-weight: 600; color: var(--accent-soft); margin-bottom: .5rem; }
+  .phone-big {
+    display: inline-block; font-family: var(--serif); font-variation-settings: "opsz" 36;
+    font-size: clamp(2.6rem, 10vw, 5.5rem); font-weight: 380; letter-spacing: -0.03em; line-height: 1;
+    text-decoration: none; color: #fff; padding-bottom: .12em; white-space: nowrap;
+  }
+  .phone-big:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+  .contact-phone p { margin-top: 1.25rem; color: var(--accent-soft); }
+  .contact dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .25rem 1.25rem; }
+  .contact dd { margin: 0; }
+  .contact address { font-style: normal; margin-top: .75rem; }
+  .contact .mt { margin-top: 1rem; }
+  .contact a:not(.phone-big) { color: #fff; }
+  .contact .placeholder { color: #fff; background: rgba(255, 255, 255, .14); }
+  @media (max-width: 59.99rem) { .contact-meta { margin-top: 3rem; } }
+
+  /* Fuß */
+  .site-foot { background: var(--accent); color: var(--accent-soft); font-size: .875rem; }
+  .site-foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; padding-top: 1.5rem; padding-bottom: 2rem; }
+  .site-foot { border-top: 1px solid rgba(255, 255, 255, .2); }
+  .site-foot nav { display: flex; gap: 1.5rem; }
+  .site-foot a { color: #fff; }
+
+  .nowrap { white-space: nowrap; }
+
+  /* ---------- Bewegung ----------
+     Alles hier gilt nur, wenn keine reduzierte Bewegung eingestellt ist. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .btn { transition: background-color .25s, color .25s, transform .4s var(--ease); }
+    .btn:active { transform: scale(.98); transition-duration: .08s; }
+    .btn svg { transition: transform .4s var(--ease); }
+    @media (hover: hover) { .btn:hover svg { transform: rotate(-8deg); } }
+    .phone-big:hover { text-decoration: none; }
+    .phone-big { background: linear-gradient(currentColor, currentColor) left 100% / 0 2px no-repeat; transition: background-size .6s var(--ease); }
+    .phone-big:hover, .phone-big:focus-visible { background-size: 100% 2px; }
+  }
+
+  /* Ein- und Ausblenden beim Scrollen (IntersectionObserver, Script am Seitenende).
+     Elemente blenden beim Hereinkommen ein und beim Verlassen wieder aus –
+     beim Runterscrollen von unten, beim Hochscrollen von oben.
+     Die Klasse .reveal setzt nur das Script – ohne JavaScript oder bei
+     reduzierter Bewegung bleibt alles sofort sichtbar. */
+  .reveal [data-reveal] {
+    transition: opacity .5s cubic-bezier(.16, 1, .3, 1), transform .5s cubic-bezier(.16, 1, .3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .reveal [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(14px);
+    transition-duration: .3s;   /* Ausblenden etwas schneller */
+    transition-delay: 0s;
+  }
+  .reveal [data-reveal][data-side="above"]:not(.is-in) { transform: translateY(-14px); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal [data-reveal], .reveal [data-reveal]:not(.is-in) { opacity: 1; transform: none; transition: none; }
+  }
+  @media print { .reveal [data-reveal] { opacity: 1 !important; transform: none !important; } }
+</style>
+<script>
+  // Früh setzen, damit nichts aufblitzt: nur mit Observer-Support und ohne reduzierte Bewegung
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reveal');
+  }
+</script>
+</head>
+<body>
+
+<div class="draft-bar" role="note">Entwurf – nicht die offizielle Website von REMO Elb</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#start" aria-label="REMO Elb – zum Seitenanfang">REMO ELB</a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#arbeitsweise">Arbeitsweise</a>
+      <a href="#ueber-mich">Über mich</a>
+      <a href="#referenzen">Referenzen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="head-call" href="tel:+491781441137">0178 1441137</a>
+  </div>
+</header>
+
+<main id="start">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="grid">
+        <h1 id="hero-title">Bauphysikalische Instandsetzung und <em>Substanzerhalt</em></h1>
+        <div class="hero-side">
+          <p><strong>REMO Elb</strong> – Maler, Lackierer, Tapezierer und Trockenbau in Wedel. Für Privatimmobilien in Wedel und den Hamburger Elbvororten, ausgeführt nach aktuellen BFS-Merkblättern und <span class="nowrap">DIN-Normen</span>.</p>
+          <a class="btn" href="tel:+491781441137">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.1 1.5 1.5 0 0 1 5 3.5Z"/></svg>
+            Jetzt anrufen
+          </a>
+        </div>
+      </div>
+      <ul class="facts-bar" aria-label="Kurzfakten">
+        <li>Seit 2018</li>
+        <li>
+          <span class="stars" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+          </span>
+          <span>5,0 Sterne bei 29 Google-Bewertungen</span>
+        </li>
+        <li>Wedel und Elbvororte</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="leistungen" aria-labelledby="leistungen-title">
+    <div class="wrap grid">
+      <div class="sec-head">
+        <h2 id="leistungen-title">Leistungen</h2>
+      </div>
+      <ul class="services">
+        <li>
+          <h3>Malerarbeiten</h3>
+          <p>Innenbeschichtungen mit Brillux Dispersions- und Silikatsystemen, vom geprüften Untergrund bis zum Systemabschluss.</p>
+        </li>
+        <li>
+          <h3>Lackierarbeiten</h3>
+          <p>Lackierungen, systemtreu aufgebaut und normgerecht ausgeführt.</p>
+        </li>
+        <li>
+          <h3>Tapezierarbeiten</h3>
+          <p>Tapezieren auf geprüftem und vorbereitetem Untergrund.</p>
+        </li>
+        <li>
+          <h3>Trockenbau</h3>
+          <p>Ausführung nach den geltenden Normen und Merkblättern.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="arbeitsweise" aria-labelledby="arbeitsweise-title">
+    <div class="wrap grid">
+      <h2 id="arbeitsweise-title">Arbeitsweise</h2>
+      <p class="method-lead">Für jedes Objekt entsteht ein eigenes Konzept für Instandsetzung und langfristigen Werterhalt.</p>
+      <div class="method-text">
+        <p><strong>Untergrundprüfung.</strong> Jede Arbeit beginnt mit der normgerechten Prüfung des Untergrunds. Sie legt fest, welcher Aufbau für die Fläche richtig ist.</p>
+        <p><strong>Normgerechte Ausführung.</strong> Alle Arbeitsschritte bis zum Systemabschluss führe ich nach aktuellen BFS-Merkblättern und DIN-Normen aus.</p>
+        <p><strong>Systemtreue.</strong> Ich verarbeite Brillux Innenraumdispersions- und Silikatsysteme systemtreu, also mit den aufeinander abgestimmten Produkten eines Systems.</p>
+        <p><strong>Garantie.</strong> Auf meine Arbeit gebe ich Garantie.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ueber-mich" aria-labelledby="ueber-title">
+    <div class="wrap grid">
+      <div class="sec-head">
+        <h2 id="ueber-title">Über mich</h2>
+        <ul class="facts">
+          <li><span>Inhaber</span><span>Herr Stoakin</span></li>
+          <li><span>Gegründet</span><span>2018</span></li>
+          <li><span>Sitz</span><span>Wedel</span></li>
+        </ul>
+      </div>
+      <div class="about-text">
+        <p class="about-lead">Ich habe mich auf die bauphysikalische Instandsetzung und den Substanzerhalt von Privatimmobilien spezialisiert.</p>
+        <p>Für jedes Objekt entwickle ich ein Konzept für die Instandsetzung und den langfristigen Werterhalt. Alle Arbeitsschritte, von der normgerechten Untergrundprüfung bis zum Systemabschluss, führe ich nach aktuellen BFS-Merkblättern und DIN-Normen aus.</p>
+        <p>Ich verarbeite hochwertige Brillux Innenraumdispersions- und Silikatsysteme systemtreu und gebe Garantie auf meine Arbeit.</p>
+        <p class="signature">Stoakin, Inhaber REMO Elb</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="referenzen" aria-labelledby="referenzen-title">
+    <div class="wrap">
+      <div class="grid">
+        <div class="sec-head">
+          <h2 id="referenzen-title">Referenzen</h2>
+        </div>
+      </div>
+      <div class="refs">
+        <figure class="ref">
+          <div class="ref-field" role="img" aria-label="Platzhalter, Foto folgt">Foto folgt</div>
+          <figcaption><span class="placeholder">[PLATZHALTER]</span> Projektbeschreibung</figcaption>
+        </figure>
+        <figure class="ref">
+          <div class="ref-field" role="img" aria-label="Platzhalter, Foto folgt">Foto folgt</div>
+          <figcaption><span class="placeholder">[PLATZHALTER]</span> Projektbeschreibung</figcaption>
+        </figure>
+        <figure class="ref">
+          <div class="ref-field" role="img" aria-label="Platzhalter, Foto folgt">Foto folgt</div>
+          <figcaption><span class="placeholder">[PLATZHALTER]</span> Projektbeschreibung</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="kundenstimmen" aria-labelledby="stimmen-title">
+    <div class="wrap">
+      <div class="grid">
+        <div class="sec-head">
+          <h2 id="stimmen-title">Kundenstimmen</h2>
+        </div>
+      </div>
+      <div class="reviews">
+        <figure class="review">
+          <blockquote><p>Nach 2 halben Tagen waren Lackarbeiten, Decke und Wände sowie überstrichene Fliesen erledigt.</p></blockquote>
+          <figcaption>Google-Bewertung</figcaption>
+        </figure>
+        <figure class="review">
+          <blockquote><p>… ich bin super dankbar, dass er so schnell zur Besichtigung und dann auch zur Umsetzung gekommen ist.</p></blockquote>
+          <figcaption>Google-Bewertung</figcaption>
+        </figure>
+        <figure class="review">
+          <blockquote><p>Er arbeitet sehr professionell, äußerst pünktlich, zuvorkommend und ist sehr sympathisch!</p></blockquote>
+          <figcaption>Google-Bewertung</figcaption>
+        </figure>
+      </div>
+      <div class="reviews-foot">
+        <a class="btn btn-line" href="https://maps.app.goo.gl/gRhzcM4te5NRbDA69" target="_blank" rel="noopener noreferrer">Alle 29 Bewertungen auf Google lesen</a>
+        <p>Stand Oktober 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="contact" aria-labelledby="kontakt-title">
+    <div class="wrap grid">
+      <h2 id="kontakt-title">Kontakt</h2>
+      <div class="contact-phone">
+        <h3>Telefon</h3>
+        <a class="phone-big" href="tel:+491781441137">0178 1441137</a>
+        <p>E-Mail: <span class="placeholder">[PLATZHALTER]</span></p>
+      </div>
+      <div class="contact-meta">
+        <div>
+          <h3>Erreichbar</h3>
+          <dl>
+            <dt>Mo–Do</dt><dd>8–16 Uhr</dd>
+            <dt>Fr</dt><dd>8–13 Uhr</dd>
+          </dl>
+        </div>
+        <div>
+          <h3>Einsatzgebiet</h3>
+          <p>Wedel und die Hamburger Elbvororte</p>
+          <address>REMO Elb<br>Feldstraße 131<br>22880 Wedel</address>
+          <p class="mt"><a href="https://www.google.com/maps/search/?api=1&amp;query=Feldstra%C3%9Fe+131%2C+22880+Wedel" target="_blank" rel="noopener noreferrer">In Google Maps öffnen</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© REMO Elb · Wertarbeit seit 2018</span>
+    <nav aria-label="Rechtliches">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('reveal')) return;
+
+    var targets = document.querySelectorAll(
+      'section:not(.hero) h2, .method-lead, .method-text p, .services li, .about-text, .facts, .ref, .review, .reviews-foot, .contact-phone, .contact-meta > div'
+    );
+    for (var i = 0; i < targets.length; i++) targets[i].setAttribute('data-reveal', '');
+
+    var STAGGER = 0.07; // Sekunden zwischen Elementen derselben Zeile
+
+    var io = new IntersectionObserver(function (entries) {
+      var entering = [];
+      entries.forEach(function (entry) {
+        var el = entry.target;
+        if (entry.isIntersecting) {
+          entering.push(entry);
+        } else {
+          // Verlassen: merken, auf welcher Seite das Element liegt –
+          // von dort blendet es beim nächsten Hereinkommen ein
+          el.setAttribute('data-side', entry.boundingClientRect.top < 0 ? 'above' : 'below');
+          el.style.removeProperty('--reveal-delay');
+          el.classList.remove('is-in');
+        }
+      });
+      // Von oben nach unten, links nach rechts – Elemente einer Zeile erhalten steigende Verzögerung
+      entering.sort(function (a, b) {
+        return (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left);
+      });
+      var rowTop = null, index = 0;
+      entering.forEach(function (entry) {
+        var top = entry.boundingClientRect.top;
+        if (rowTop === null || Math.abs(top - rowTop) > 8) { rowTop = top; index = 0; }
+        entry.target.style.setProperty('--reveal-delay', Math.min(index, 3) * STAGGER + 's');
+        entry.target.classList.add('is-in');
+        index++;
+      });
+    }, { rootMargin: '0px 0px -6% 0px' });
+
+    for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
+
+    // Wechselt der Nutzer zu „Bewegung reduzieren“, alles sofort zeigen
+    var mq = matchMedia('(prefers-reduced-motion: reduce)');
+    var showAll = function () { if (mq.matches) { io.disconnect(); root.classList.remove('reveal'); } };
+    if (mq.addEventListener) mq.addEventListener('change', showAll);
+  })();
+</script>
+</body>
+</html>
