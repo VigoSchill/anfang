@@ -6,392 +6,518 @@
 <title>Birkholz Decoration – Raumausstattung in Hamburg-Blankenese</title>
 <meta name="description" content="Birkholz Decoration – Raumausstattung, Dekoration und Wohnaccessoires an der Elbchaussee 535 in Hamburg-Blankenese.">
 <meta name="theme-color" content="#f8f4ee">
+<link rel="preload" href="fonts/libre-caslon-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hanken-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("js");</script>
 <style>
-  /* Schriften lokal eingebunden (keine Verbindung zu Google-Servern) */
-  @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/cormorant-garamond-latin-400-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/cormorant-garamond-latin-400-italic.woff2") format("woff2"); }
-  @font-face { font-family: "Jost"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/jost-latin-400-normal.woff2") format("woff2"); }
-  @font-face { font-family: "Jost"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/jost-latin-500-normal.woff2") format("woff2"); }
+  /* ============================================================
+     Schriften – lokal eingebunden, keine Verbindung zu Google
+     ============================================================ */
+  @font-face { font-family: "Libre Caslon Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/libre-caslon-display-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Hanken Grotesk"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/hanken-grotesk-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Hanken Grotesk"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/hanken-grotesk-latin-500-normal.woff2") format("woff2"); }
 
+  /* ============================================================
+     Gestaltungsvariablen
+     ============================================================ */
   :root {
-    --bg: #f8f4ee;
-    --surface: #f0e9df;
-    --card: #fffdf9;
-    --ink: #2e2924;
-    --muted: #6b6158;
-    --accent: #8b6b4e;
-    --accent-dark: #6f533b;
-    --line: #ddd2c4;
-    --sage: #8f9483;
-    --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
-    --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
-    --wrap: 72rem;
-    --gutter: clamp(1.25rem, 5vw, 3rem);
+    /* Farben – bestehende Palette */
+    --color-paper: #f8f4ee;         /* Seitenhintergrund */
+    --color-stone: #f0e9df;         /* ruhige Flächen, Bild-Platzhalter */
+    --color-ink: #2e2924;           /* Text, Fußzeile */
+    --color-ink-soft: #6b6158;      /* Nebentext (5.5:1 auf Papier) */
+    --color-line: #ddd2c4;          /* feine Linien */
+    --color-sage: #8f9483;          /* nur dekorativ, nie für Text */
+    --color-accent: #8b6b4e;        /* einziger Akzent: Anruf-Button */
+    --color-accent-strong: #6f533b; /* Akzent als Text, Hover, Fokus (6.4:1) */
+    --color-on-ink: #ddd2c4;        /* Text auf dunklem Grund */
+    --color-on-ink-soft: #a99d90;
+    --color-flag: #8a3b2a;          /* Platzhalter-Kennzeichnung */
+    --color-flag-bg: #f6e3da;
+
+    /* Schriften */
+    --font-display: "Libre Caslon Display", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+    --font-text: "Hanken Grotesk", "Helvetica Neue", "Segoe UI", sans-serif;
+
+    /* Schriftgrößen (feste Stufen) */
+    --text-xs: 0.8125rem;                        /* 13px */
+    --text-sm: 0.9375rem;                        /* 15px */
+    --text-base: 1.0625rem;                      /* 17px */
+    --text-md: 1.25rem;                          /* 20px */
+    --text-lg: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+    --text-xl: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem);
+    --text-2xl: clamp(3rem, 1.6rem + 6vw, 6.5rem);
+
+    /* Abstände – 8px-System */
+    --space-1: 0.5rem;   /*   8px */
+    --space-2: 1rem;     /*  16px */
+    --space-3: 1.5rem;   /*  24px */
+    --space-4: 2rem;     /*  32px */
+    --space-5: 2.5rem;   /*  40px */
+    --space-6: 3rem;     /*  48px */
+    --space-8: 4rem;     /*  64px */
+    --space-10: 5rem;    /*  80px */
+    --space-12: 6rem;    /*  96px */
+    --space-16: 8rem;    /* 128px */
+    --section: clamp(var(--space-10), 10vw, var(--space-16));
+
+    /* Raster */
+    --page-max: 90rem;
+    --gutter: clamp(var(--space-2), 4vw, var(--space-6));
+    --col-gap: clamp(var(--space-2), 2vw, var(--space-4));
+
+    /* Details */
+    --radius: 2px;
+    --hairline: 1px solid var(--color-line);
+    --shadow-soft: 0 1px 2px rgba(46, 41, 36, 0.06), 0 4px 12px rgba(46, 41, 36, 0.06);
+    --header-h: 5rem;
+    --measure: 60ch;
+
+    /* Bewegung */
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --dur-fast: 200ms;
+    --dur-reveal: 560ms;
   }
 
+  /* ============================================================
+     Grundlagen
+     ============================================================ */
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; -webkit-text-size-adjust: 100%; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--space-10); }
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 1.0625rem;
-    line-height: 1.7;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-text);
+    font-size: var(--text-base);
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; color: var(--color-ink); }
+  h1 { font-size: var(--text-2xl); line-height: 0.98; letter-spacing: -0.015em; }
+  h2 { font-size: var(--text-xl); line-height: 1.08; letter-spacing: -0.01em; }
+  h3 { font-size: var(--text-lg); line-height: 1.2; }
+  p { margin: 0 0 var(--space-2); max-width: var(--measure); }
+  p:last-child { margin-bottom: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--color-accent-strong); outline-offset: 4px; border-radius: var(--radius); }
+  .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .skip-link { position: absolute; left: var(--space-2); top: var(--space-1); z-index: 30; padding: var(--space-1) var(--space-2); background: var(--color-ink); color: var(--color-paper); transform: translateY(-200%); }
+  .skip-link:focus { transform: none; }
 
-  img { max-width: 100%; display: block; }
-  a { color: inherit; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  /* Raster: 4 Spalten mobil, 12 ab 64rem */
+  .container { width: 100%; max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter); }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--col-gap); }
+  .grid > * { grid-column: 1 / -1; }
+  @media (min-width: 64rem) { .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
 
-  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  .meta { font-size: var(--text-xs); letter-spacing: 0.06em; color: var(--color-ink-soft); }
 
-  h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.15; margin: 0; letter-spacing: 0.005em; }
-  h2 { font-size: clamp(2rem, 6vw, 2.9rem); }
-  h3 { font-size: 1.6rem; font-weight: 500; }
-  p { margin: 0 0 1em; }
-
-  .eyebrow {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-
-  .placeholder {
+  /* Platzhalter-Kennzeichnung */
+  .flag {
     display: inline-block;
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    color: #8a3b2a;
-    background: #f6e3da;
-    border: 1px dashed #c98a76;
-    border-radius: 3px;
-    padding: 0.1em 0.5em;
-    vertical-align: middle;
+    font-family: var(--font-text); font-size: var(--text-xs); font-weight: 500; line-height: 1.5; letter-spacing: 0.04em;
+    color: var(--color-flag); background: var(--color-flag-bg);
+    border: 1px dashed var(--color-flag); border-radius: var(--radius);
+    padding: 0 var(--space-1);
   }
 
-  /* Kopfzeile */
-  .site-header {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(248, 244, 238, 0.94);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4rem; }
-  .brand { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; text-decoration: none; letter-spacing: 0.02em; white-space: nowrap; }
-  .nav { display: none; gap: 2rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  .nav a { text-decoration: none; color: var(--muted); transition: color .2s; }
-  .nav a:hover { color: var(--ink); }
-  .header-call {
-    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
-    text-decoration: none; color: var(--accent-dark);
-    border: 1px solid var(--accent); border-radius: 999px;
-    padding: 0.45rem 1rem; white-space: nowrap;
-  }
-  @media (min-width: 56rem) { .nav { display: flex; } }
+  /* ============================================================
+     Links und Buttons – animiert werden nur transform/opacity
+     ============================================================ */
+  .link { position: relative; display: inline-block; padding-bottom: 2px; }
+  .link::before, .link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; }
+  .link::before { background: var(--color-line); }
+  .link::after { background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--dur-fast) var(--ease-out); }
+  .link:hover::after, .link:focus-visible::after { transform: scaleX(1); }
+  .link--quiet::before { opacity: 0; }
 
-  /* Buttons */
+  .arrow { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
+  a:hover .arrow, a:focus-visible .arrow { transform: translateX(4px); }
+
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
-    min-height: 3.25rem; padding: 0.85rem 1.75rem;
-    font-family: var(--sans); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.06em;
-    text-decoration: none; border-radius: 999px; border: 1px solid var(--accent);
-    transition: background-color .2s, color .2s, border-color .2s;
+    position: relative; isolation: isolate; overflow: hidden;
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    min-height: var(--space-6); padding: var(--space-2) var(--space-3);
+    font-family: var(--font-text); font-size: var(--text-sm); font-weight: 500; letter-spacing: 0.02em; line-height: 1;
+    border-radius: var(--radius);
+    background: var(--color-accent); color: #fff;
+    transition: transform var(--dur-fast) var(--ease-out);
   }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-  .btn-ghost { background: transparent; color: var(--accent-dark); }
-  .btn-ghost:hover { background: var(--surface); }
-  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
+  .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--color-accent-strong); opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
+  .btn::after { content: ""; position: absolute; inset: 0; z-index: -2; border-radius: inherit; box-shadow: var(--shadow-soft); opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:hover::before, .btn:focus-visible::before { opacity: 1; }
+  .btn:hover::after { opacity: 1; }
+  .btn:active { transform: translateY(0); }
 
-  /* Start */
-  .hero { padding: clamp(4rem, 14vw, 9rem) 0 clamp(4rem, 12vw, 8rem); position: relative; overflow: hidden; }
-  .hero::after {
-    content: ""; position: absolute; right: -12rem; top: -6rem;
-    width: 30rem; height: 30rem; border-radius: 50%;
-    background: radial-gradient(circle, rgba(143, 148, 131, 0.16), rgba(143, 148, 131, 0) 70%);
-    pointer-events: none;
+  /* ============================================================
+     Entwurfs-Hinweis
+     ============================================================ */
+  .draft-bar { background: var(--color-stone); color: var(--color-ink-soft); font-size: var(--text-xs); line-height: 1.5; letter-spacing: 0.02em; text-align: center; padding: var(--space-1) var(--space-2); border-bottom: var(--hairline); }
+
+  /* ============================================================
+     Kopfzeile – wird beim Scrollen kompakter
+     ============================================================ */
+  .site-header {
+    position: sticky; top: calc(var(--space-2) * -1); z-index: 20;
+    height: var(--header-h);
+    background: var(--color-paper);
   }
-  .hero h1 { font-size: clamp(2.9rem, 12vw, 5.75rem); line-height: 1.02; margin-bottom: 1.5rem; }
-  .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero .lead { font-size: clamp(1.1rem, 3.5vw, 1.3rem); color: var(--muted); max-width: 34rem; margin-bottom: 2.5rem; }
-  .hero .actions { display: flex; flex-direction: column; gap: 0.85rem; max-width: 22rem; }
-  .hero .place { margin-top: 3rem; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  @media (min-width: 36rem) { .hero .actions { flex-direction: row; max-width: none; } }
+  .site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: var(--hairline); opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
+  .site-header .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+  .brand { font-family: var(--font-display); font-size: var(--text-md); line-height: 1; white-space: nowrap; transform-origin: left center; }
+  .brand, .site-nav, .header-call { transition: transform 320ms var(--ease-out); }
+  .site-nav { display: none; gap: var(--space-4); font-size: var(--text-sm); }
+  .header-call { font-size: var(--text-sm); font-weight: 500; color: var(--color-accent-strong); white-space: nowrap; }
+  @media (min-width: 64rem) { .site-nav { display: flex; } }
 
-  .rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+  .site-header.is-compact::after { opacity: 1; }
+  .site-header.is-compact .site-nav,
+  .site-header.is-compact .header-call { transform: translateY(var(--space-1)); }
+  .site-header.is-compact .brand { transform: translateY(var(--space-1)) scale(0.9); }
 
-  section { padding: clamp(4rem, 11vw, 7rem) 0; }
-  .section-head { max-width: 38rem; margin-bottom: clamp(2.5rem, 6vw, 3.5rem); }
-  .section-head p { color: var(--muted); margin-top: 1rem; }
-
-  /* Leistungen */
-  .cards { display: grid; gap: 1.25rem; grid-template-columns: 1fr; list-style: none; margin: 0; padding: 0; }
-  @media (min-width: 40rem) { .cards { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 64rem) { .cards { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 4px;
-    padding: 2rem 1.75rem 1.75rem;
+  /* ============================================================
+     Start
+     ============================================================ */
+  .hero { padding: var(--space-8) 0 var(--section); }
+  .hero__text { display: flex; flex-direction: column; }
+  .hero__kicker { margin-bottom: var(--space-4); }
+  .hero h1 { margin-bottom: var(--space-4); }
+  .hero__lead { font-size: var(--text-md); line-height: 1.55; color: var(--color-ink-soft); max-width: 34ch; margin-bottom: var(--space-5); }
+  .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+  .hero__facts { margin-top: var(--space-8); padding-top: var(--space-3); border-top: var(--hairline); display: grid; gap: var(--space-2); font-size: var(--text-sm); }
+  .hero__facts dt { color: var(--color-ink-soft); font-size: var(--text-xs); letter-spacing: 0.06em; }
+  .hero__facts dd { margin: 0; }
+  .hero__media { margin-top: var(--space-6); }
+  .hero__media { aspect-ratio: 4 / 5; }
+  @media (min-width: 40rem) {
+    .hero__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+    .hero__media { aspect-ratio: 3 / 2; }
   }
-  .card .num { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--accent); display: block; margin-bottom: 0.75rem; }
-  .card h3 { margin-bottom: 1.1rem; }
-  .card ul { list-style: none; margin: 0; padding: 0; font-size: 0.98rem; color: var(--muted); }
-  .card li { padding: 0.45rem 0 0.45rem 1.25rem; position: relative; border-top: 1px solid #ece4d8; }
-  .card li:first-child { border-top: 0; }
-  .card li::before { content: ""; position: absolute; left: 0; top: 1.05rem; width: 0.5rem; height: 1px; background: var(--accent); }
-
-  /* Über uns */
-  .about { background: var(--surface); }
-  .about .grid { display: grid; gap: 2.5rem; }
-  @media (min-width: 56rem) { .about .grid { grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; } }
-  .about blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.3; color: var(--accent-dark); }
-  .about .text p { color: var(--muted); }
-
-  /* Galerie */
-  .gallery { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, 1fr); }
-  @media (min-width: 56rem) { .gallery { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
-  .ph {
-    margin: 0; aspect-ratio: 4 / 5; border-radius: 3px; position: relative; overflow: hidden;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
-    text-align: center; padding: 1rem; color: var(--muted);
-    border: 1px dashed #c9bba8;
-    background:
-      repeating-linear-gradient(135deg, rgba(139,107,78,0.05) 0 1px, transparent 1px 14px),
-      linear-gradient(160deg, #efe6da, #e3d8c9);
+  @media (min-width: 64rem) {
+    .hero { padding-top: var(--space-12); }
+    .hero__text { grid-column: 1 / span 7; padding-right: var(--space-4); }
+    .hero__media { grid-column: 8 / -1; margin-top: 0; aspect-ratio: auto; min-height: 36rem; }
   }
-  .ph:nth-child(3n+2) { background: repeating-linear-gradient(135deg, rgba(143,148,131,0.08) 0 1px, transparent 1px 14px), linear-gradient(160deg, #e9e8df, #d9dacd); }
-  .ph:nth-child(4n+3) { background: repeating-linear-gradient(135deg, rgba(139,107,78,0.06) 0 1px, transparent 1px 14px), linear-gradient(160deg, #f3ebe2, #e8dccd); }
-  .ph.wide { grid-column: span 2; aspect-ratio: 8 / 5; }
-  @media (min-width: 56rem) { .ph.wide { grid-column: span 1; aspect-ratio: 4 / 5; } }
-  .ph svg { width: 2rem; height: 2rem; opacity: 0.55; }
-  .ph figcaption { font-size: 0.82rem; line-height: 1.4; }
-  .gallery-note { margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted); }
 
-  /* Kontakt */
-  .contact { background: var(--ink); color: #efe8de; }
-  .contact .eyebrow { color: #c9a98a; }
-  .contact .section-head p { color: #bfb4a7; }
-  .contact-grid { display: grid; gap: 2.5rem; }
-  @media (min-width: 48rem) { .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; } }
-  @media (min-width: 64rem) { .contact-grid { grid-template-columns: 1.1fr 1fr 1fr; } }
-  .contact h3 { font-size: 1.35rem; margin-bottom: 0.9rem; color: #fff; }
-  .contact address { font-style: normal; }
-  .contact a { text-decoration: none; border-bottom: 1px solid rgba(201, 169, 138, 0.5); transition: border-color .2s, color .2s; }
-  .contact a:hover { color: #fff; border-color: #c9a98a; }
-  .contact .big { font-family: var(--serif); font-size: 1.75rem; line-height: 1.3; display: inline-block; }
-  .contact .map-link { display: inline-block; margin-top: 0.9rem; font-size: 0.9rem; letter-spacing: 0.04em; }
-  .contact .small { font-size: 0.85rem; color: #a99d90; margin-top: 0.5rem; }
-  .hours { width: 100%; border-collapse: collapse; font-size: 1rem; }
-  .hours th, .hours td { text-align: left; padding: 0.55rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-weight: 400; }
-  .hours td { text-align: right; }
-  .hours tr.closed td { color: #a99d90; }
-  .contact .btn-primary { margin-top: 1.5rem; background: #c9a98a; border-color: #c9a98a; color: var(--ink); }
-  .contact .btn-primary:hover { background: #dcc0a5; border-color: #dcc0a5; color: var(--ink); }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero [data-stagger] { animation: rise 640ms var(--ease-out) both; }
+    .hero [data-stagger="2"] { animation-delay: 90ms; }
+    .hero [data-stagger="3"] { animation-delay: 180ms; }
+    .hero [data-stagger="4"] { animation-delay: 270ms; }
+    .hero [data-stagger="5"] { animation-delay: 360ms; }
+    .hero [data-stagger="6"] { animation-delay: 200ms; animation-duration: 900ms; }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* ============================================================
+     Bild-Platzhalter – flache Fläche, Rahmen-Kreuz wie im Layout-Druck
+     ============================================================ */
+  .media { position: relative; margin: 0; overflow: hidden; border-radius: var(--radius); background: var(--color-stone); }
+  .media__fill {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0L100 100M100 0L0 100' stroke='%23ddd2c4' stroke-width='0.6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    transition: transform 700ms var(--ease-out);
+  }
+  .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); }
+  .media:hover .media__fill, .media:hover img { transform: scale(1.02); }
+  .media figcaption {
+    position: absolute; left: var(--space-2); right: var(--space-2); bottom: var(--space-2);
+    display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1);
+    font-size: var(--text-xs); line-height: 1.45; color: var(--color-ink-soft);
+  }
+  .media figcaption span { background: var(--color-stone); padding: 0 4px; }
+  .media::after { content: ""; position: absolute; inset: 0; border: 1px dashed var(--color-line); border-radius: inherit; pointer-events: none; }
+
+  /* ============================================================
+     Sektionen allgemein
+     ============================================================ */
+  .section { padding: var(--section) 0; }
+  .section + .section { border-top: var(--hairline); }
+  .section__title { margin-bottom: var(--space-6); }
+  @media (min-width: 64rem) {
+    .section__title { grid-column: 1 / span 4; margin-bottom: 0; }
+    .section__body { grid-column: 5 / -1; }
+  }
+
+  /* Leistungen – Verzeichnis statt Kacheln */
+  .services { border-top: 1px solid var(--color-ink); }
+  .service { padding: var(--space-4) 0; border-bottom: var(--hairline); display: grid; gap: var(--space-2); }
+  .service h3 { font-size: var(--text-lg); }
+  .service ul { font-size: var(--text-base); color: var(--color-ink-soft); }
+  .service li { padding: 2px 0; }
+  @media (min-width: 40rem) {
+    .service { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--col-gap); padding: var(--space-5) 0; }
+    .service ul { padding-top: 6px; }
+  }
+
+  /* Über uns – Bild links, Text rechts unten */
+  .about { background: var(--color-stone); }
+  .section + .about, .about + .section { border-top: 0; }
+  .about .media { aspect-ratio: 3 / 2; background: var(--color-paper); }
+  .about .media figcaption span { background: var(--color-paper); }
+  .about__text { margin-top: var(--space-6); }
+  .about__text h2 { margin-bottom: var(--space-4); }
+  .about__text p { color: var(--color-ink-soft); }
+  @media (min-width: 64rem) {
+    .about .media { grid-column: 1 / span 6; }
+    .about__text { grid-column: 8 / -1; margin-top: 0; align-self: end; }
+  }
+
+  /* Galerie – asymmetrisches Mosaik */
+  .gallery-head { display: grid; gap: var(--space-3); margin-bottom: var(--space-6); }
+  .gallery-head p { color: var(--color-ink-soft); max-width: 44ch; }
+  @media (min-width: 64rem) {
+    .gallery-head { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: end; margin-bottom: var(--space-8); }
+    .gallery-head h2 { grid-column: 1 / span 4; }
+    .gallery-head p { grid-column: 5 / span 5; }
+  }
+  .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+  .gallery .media { aspect-ratio: 4 / 5; }
+  .gallery .g-a, .gallery .g-d { grid-column: 1 / -1; aspect-ratio: 3 / 2; }
+  @media (min-width: 64rem) {
+    .gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: clamp(5rem, 7vw, 7rem); gap: var(--col-gap); }
+    .gallery .media, .gallery .g-a, .gallery .g-d { aspect-ratio: auto; }
+    .gallery .g-a { grid-column: 1 / span 7; grid-row: 1 / span 4; }
+    .gallery .g-b { grid-column: 8 / span 5; grid-row: 1 / span 5; }
+    .gallery .g-c { grid-column: 1 / span 3; grid-row: 5 / span 3; }
+    .gallery .g-d { grid-column: 4 / span 4; grid-row: 5 / span 3; }
+    .gallery .g-e { grid-column: 8 / span 5; grid-row: 6 / span 4; }
+    .gallery .g-f { grid-column: 2 / span 6; grid-row: 8 / span 2; }
+  }
+
+  /* Kontakt – gesetzt wie ein Briefkopf */
+  .contact-grid { display: grid; gap: var(--space-6); }
+  .contact-block h3 { font-family: var(--font-text); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.06em; color: var(--color-ink-soft); margin-bottom: var(--space-2); }
+  .contact-block address { font-style: normal; font-size: var(--text-md); line-height: 1.5; }
+  .contact-block .stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+  .contact-block .btn { margin-top: var(--space-2); }
+  .contact-phone { font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.1; white-space: nowrap; }
+  .contact-note { font-size: var(--text-xs); color: var(--color-ink-soft); margin-top: var(--space-1); }
+  .contact-map { font-size: var(--text-sm); color: var(--color-accent-strong); margin-top: var(--space-3); }
+  .hours { width: 100%; max-width: 28rem; border-collapse: collapse; font-size: var(--text-base); font-variant-numeric: tabular-nums; }
+  .hours th, .hours td { padding: var(--space-1) 0; border-bottom: var(--hairline); font-weight: 400; text-align: left; vertical-align: baseline; }
+  .hours tr:first-child th, .hours tr:first-child td { border-top: 1px solid var(--color-ink); }
+  .hours td { text-align: right; padding-left: var(--space-3); white-space: nowrap; }
+  .hours .closed td { color: var(--color-ink-soft); }
+  @media (min-width: 48rem) {
+    .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: var(--space-8); }
+    .contact-hours { grid-column: 1 / -1; }
+  }
 
   /* Fußzeile */
-  .site-footer { background: #24201c; color: #a99d90; font-size: 0.875rem; padding: 2rem 0 2.5rem; }
-  .site-footer .wrap { display: flex; flex-direction: column; gap: 1rem; }
-  .site-footer nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .site-footer a { color: #e3d9cc; text-decoration: none; border-bottom: 1px solid transparent; }
-  .site-footer a:hover { border-color: currentColor; }
-  @media (min-width: 40rem) { .site-footer .wrap { flex-direction: row; justify-content: space-between; align-items: center; } }
+  .site-footer { background: var(--color-ink); color: var(--color-on-ink-soft); font-size: var(--text-sm); padding: var(--space-5) 0; }
+  .site-footer .container { display: flex; flex-direction: column; gap: var(--space-2); }
+  .site-footer nav { display: flex; gap: var(--space-3); }
+  .site-footer a { color: var(--color-on-ink); }
+  .site-footer .link::before { background: rgba(221, 210, 196, 0.25); }
+  .site-footer :focus-visible { outline-color: var(--color-on-ink); }
+  @media (min-width: 48rem) { .site-footer .container { flex-direction: row; justify-content: space-between; align-items: center; } }
 
-  .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .draft-bar { background: #e9e1d5; color: #5e554c; font-family: "Jost", "Helvetica Neue", Arial, sans-serif; font-size: 0.75rem; letter-spacing: 0.04em; line-height: 1.4; text-align: center; padding: 0.4rem 1rem; border-bottom: 1px solid #ddd2c4; }
+  /* ============================================================
+     Einblenden beim Scrollen (nur mit JS, nur ohne reduzierte Bewegung)
+     ============================================================ */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out); }
+    .js [data-reveal].is-visible { opacity: 1; transform: none; }
+    .js [data-reveal-delay="1"] { transition-delay: 80ms; }
+    .js [data-reveal-delay="2"] { transition-delay: 160ms; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 1ms !important; animation: none !important; }
+  }
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 <div class="draft-bar" role="note">Entwurf – nicht die offizielle Website von Birkholz Decoration</div>
 
-<header class="site-header">
-  <div class="wrap">
+<header class="site-header" id="kopf">
+  <div class="container">
     <a class="brand" href="#start">Birkholz Decoration</a>
-    <nav class="nav" aria-label="Hauptnavigation">
-      <a href="#leistungen">Leistungen</a>
-      <a href="#ueber-uns">Über uns</a>
-      <a href="#galerie">Galerie</a>
-      <a href="#kontakt">Kontakt</a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a class="link link--quiet" href="#leistungen">Leistungen</a>
+      <a class="link link--quiet" href="#ueber-uns">Über uns</a>
+      <a class="link link--quiet" href="#galerie">Galerie</a>
+      <a class="link link--quiet" href="#kontakt">Kontakt</a>
     </nav>
-    <a class="header-call" href="tel:+494086648944" aria-label="Anrufen: 040 86648944">Anrufen</a>
+    <a class="header-call link" href="tel:+494086648944">040 86648944</a>
   </div>
 </header>
 
-<main>
+<main id="inhalt">
 
   <!-- 1. Start -->
   <section class="hero" id="start">
-    <div class="wrap">
-      <span class="eyebrow">Raumausstattung · Dekoration · Wohnaccessoires</span>
-      <h1>Birkholz<br><em>Decoration</em></h1>
-      <p class="lead">Raumausstattung, Dekoration und Wohnaccessoires in Hamburg-Blankenese – von der ersten Planung bis zum fertig eingerichteten Raum.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="tel:+494086648944">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
-          040 86648944 anrufen
-        </a>
-        <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+    <div class="container grid">
+      <div class="hero__text">
+        <p class="meta hero__kicker" data-stagger="1">Raumausstattung · Dekoration · Wohnaccessoires</p>
+        <h1 data-stagger="2">Birkholz<br>Decoration</h1>
+        <p class="hero__lead" data-stagger="3">Raumausstattung, Dekoration und Wohnaccessoires in Hamburg-Blankenese – von der ersten Planung bis zum fertig eingerichteten Raum.</p>
+        <div class="hero__actions" data-stagger="4">
+          <a class="btn" href="tel:+494086648944">040 86648944 anrufen</a>
+          <a class="link" href="#leistungen">Leistungen ansehen <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <dl class="hero__facts" data-stagger="5">
+          <div>
+            <dt>Adresse</dt>
+            <dd>Elbchaussee 535, 22587 Hamburg</dd>
+          </div>
+          <div>
+            <dt>Geöffnet</dt>
+            <dd>Mi–Fr 10–18 Uhr, Sa 10–14 Uhr</dd>
+          </div>
+        </dl>
       </div>
-      <p class="place">Elbchaussee 535 · 22587 Hamburg-Blankenese</p>
+      <figure class="hero__media media" data-stagger="6">
+        <div class="media__fill"></div>
+        <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Ladengeschäft oder Schaufenster · Hochformat 4:5</span></figcaption>
+      </figure>
     </div>
   </section>
 
-  <hr class="rule">
-
   <!-- 2. Leistungen -->
-  <section id="leistungen">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Leistungen</span>
-        <h2>Was wir für Sie tun</h2>
+  <section class="section" id="leistungen">
+    <div class="container grid">
+      <h2 class="section__title" data-reveal>Leistungen</h2>
+      <div class="section__body">
+        <ul class="services">
+          <li class="service" data-reveal>
+            <h3>Planung und Beratung</h3>
+            <ul>
+              <li>Innenarchitektur</li>
+              <li>Raumplanung</li>
+              <li>Inneneinrichtung</li>
+              <li>Lichtdesign</li>
+              <li>Auswahl von Bodenbelägen</li>
+            </ul>
+          </li>
+          <li class="service" data-reveal>
+            <h3>Wohnräume</h3>
+            <ul>
+              <li>Wohnzimmer</li>
+              <li>Esszimmer</li>
+              <li>Schlafzimmer</li>
+              <li>Küche</li>
+              <li>Badezimmer</li>
+            </ul>
+          </li>
+          <li class="service" data-reveal>
+            <h3>Möbel und Einbauten</h3>
+            <ul>
+              <li>Möbelbau</li>
+              <li>Einbauschränke</li>
+              <li>Holzeinbauten</li>
+            </ul>
+          </li>
+          <li class="service" data-reveal>
+            <h3>Gewerbliche Räume</h3>
+            <ul>
+              <li>Büros</li>
+              <li>Restaurants</li>
+              <li>Gastgewerbe</li>
+            </ul>
+          </li>
+          <li class="service" data-reveal>
+            <h3>Home Staging</h3>
+            <ul>
+              <li>Inszenierung von Immobilien für den Verkauf</li>
+              <li>Inszenierung von Immobilien für die Vermietung</li>
+            </ul>
+          </li>
+          <li class="service" data-reveal>
+            <h3>Oberflächen und Renovierung</h3>
+            <ul>
+              <li>Malerarbeiten im Innenbereich</li>
+              <li>Stein-, Ziegel- und Stuckarbeiten</li>
+              <li>Renovierung</li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <ul class="cards">
-        <li class="card">
-          <span class="num">01</span>
-          <h3>Planung und Beratung</h3>
-          <ul>
-            <li>Innenarchitektur</li>
-            <li>Raumplanung</li>
-            <li>Inneneinrichtung</li>
-            <li>Lichtdesign</li>
-            <li>Auswahl von Bodenbelägen</li>
-          </ul>
-        </li>
-        <li class="card">
-          <span class="num">02</span>
-          <h3>Wohnräume</h3>
-          <ul>
-            <li>Wohnzimmer</li>
-            <li>Esszimmer</li>
-            <li>Schlafzimmer</li>
-            <li>Küche</li>
-            <li>Badezimmer</li>
-          </ul>
-        </li>
-        <li class="card">
-          <span class="num">03</span>
-          <h3>Möbel und Einbauten</h3>
-          <ul>
-            <li>Möbelbau</li>
-            <li>Einbauschränke</li>
-            <li>Holzeinbauten</li>
-          </ul>
-        </li>
-        <li class="card">
-          <span class="num">04</span>
-          <h3>Gewerbliche Räume</h3>
-          <ul>
-            <li>Büros</li>
-            <li>Restaurants</li>
-            <li>Gastgewerbe</li>
-          </ul>
-        </li>
-        <li class="card">
-          <span class="num">05</span>
-          <h3>Home Staging</h3>
-          <ul>
-            <li>Inszenierung von Immobilien für den Verkauf</li>
-            <li>Inszenierung von Immobilien für die Vermietung</li>
-          </ul>
-        </li>
-        <li class="card">
-          <span class="num">06</span>
-          <h3>Oberflächen und Renovierung</h3>
-          <ul>
-            <li>Malerarbeiten im Innenbereich</li>
-            <li>Stein-, Ziegel- und Stuckarbeiten</li>
-            <li>Renovierung</li>
-          </ul>
-        </li>
-      </ul>
     </div>
   </section>
 
   <!-- 3. Über uns -->
-  <section class="about" id="ueber-uns">
-    <div class="wrap grid">
-      <div>
-        <span class="eyebrow">Über uns</span>
-        <h2>Birkholz Decoration</h2>
-      </div>
-      <div class="text">
-        <p><span class="placeholder">[PLATZHALTER]</span> Hier steht ein kurzer Text über das Geschäft: wer hinter Birkholz Decoration steht, wie Sie arbeiten und was Ihre Kundinnen und Kunden bei Ihnen erwartet.</p>
-        <p><span class="placeholder">[PLATZHALTER]</span> Optional ein zweiter Absatz, z.&nbsp;B. zum Ladengeschäft an der Elbchaussee oder zum Ablauf einer Beratung. Bitte nur Angaben verwenden, die vom Betrieb bestätigt sind.</p>
+  <section class="section about" id="ueber-uns">
+    <div class="container grid">
+      <figure class="media" data-reveal>
+        <div class="media__fill"></div>
+        <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Inhaber/in oder Team im Geschäft · Querformat 3:2</span></figcaption>
+      </figure>
+      <div class="about__text" data-reveal data-reveal-delay="1">
+        <h2>Über uns</h2>
+        <p><span class="flag">[PLATZHALTER]</span> Hier steht ein kurzer Text über das Geschäft: wer hinter Birkholz Decoration steht, wie Sie arbeiten und was Ihre Kundinnen und Kunden bei Ihnen erwartet.</p>
+        <p><span class="flag">[PLATZHALTER]</span> Optional ein zweiter Absatz, z.&nbsp;B. zum Ladengeschäft an der Elbchaussee oder zum Ablauf einer Beratung. Bitte nur Angaben verwenden, die vom Betrieb bestätigt sind.</p>
       </div>
     </div>
   </section>
 
   <!-- 4. Galerie -->
-  <section id="galerie">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Galerie</span>
-        <h2>Einblicke</h2>
-        <p><span class="placeholder">[PLATZHALTER]</span> Hier erscheinen später eigene Fotos von Projekten und aus dem Geschäft.</p>
+  <section class="section" id="galerie">
+    <div class="container">
+      <div class="gallery-head" data-reveal>
+        <h2>Galerie</h2>
+        <p><span class="flag">[PLATZHALTER]</span> Hier erscheinen später eigene Fotos von Projekten und aus dem Geschäft.</p>
       </div>
       <div class="gallery">
-        <figure class="ph wide">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="m3 17 5-4 4 3 3-2 6 4"/></svg>
-          <figcaption>[PLATZHALTER]<br>Bild: Wohnraum</figcaption>
+        <figure class="media g-a" data-reveal>
+          <div class="media__fill"></div>
+          <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Wohnraum · Querformat 3:2</span></figcaption>
         </figure>
-        <figure class="ph">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="m3 17 5-4 4 3 3-2 6 4"/></svg>
-          <figcaption>[PLATZHALTER]<br>Bild: Möbel / Einbauten</figcaption>
+        <figure class="media g-b" data-reveal data-reveal-delay="1">
+          <div class="media__fill"></div>
+          <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Möbel / Einbauten · Hochformat 4:5</span></figcaption>
         </figure>
-        <figure class="ph">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="m3 17 5-4 4 3 3-2 6 4"/></svg>
-          <figcaption>[PLATZHALTER]<br>Bild: Wohnaccessoires</figcaption>
+        <figure class="media g-c" data-reveal>
+          <div class="media__fill"></div>
+          <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Wohnaccessoires · Hochformat 4:5</span></figcaption>
         </figure>
-        <figure class="ph">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="m3 17 5-4 4 3 3-2 6 4"/></svg>
-          <figcaption>[PLATZHALTER]<br>Bild: Gewerbliche Räume</figcaption>
+        <figure class="media g-d" data-reveal data-reveal-delay="1">
+          <div class="media__fill"></div>
+          <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Gewerbliche Räume · Querformat 3:2</span></figcaption>
         </figure>
-        <figure class="ph">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="m3 17 5-4 4 3 3-2 6 4"/></svg>
-          <figcaption>[PLATZHALTER]<br>Bild: Home Staging</figcaption>
+        <figure class="media g-e" data-reveal data-reveal-delay="2">
+          <div class="media__fill"></div>
+          <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Home Staging · Hochformat 4:5</span></figcaption>
         </figure>
-        <figure class="ph wide">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="9" cy="10" r="1.8"/><path d="m3 17 5-4 4 3 3-2 6 4"/></svg>
-          <figcaption>[PLATZHALTER]<br>Bild: Ladengeschäft</figcaption>
+        <figure class="media g-f" data-reveal>
+          <div class="media__fill"></div>
+          <figcaption><span class="flag">[PLATZHALTER]</span><span>Foto: Ladengeschäft · Querformat 3:1</span></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
   <!-- 5. Kontakt -->
-  <section class="contact" id="kontakt">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Kontakt</span>
-        <h2>Besuchen Sie uns in Blankenese</h2>
-      </div>
-      <div class="contact-grid">
-        <div>
+  <section class="section" id="kontakt">
+    <div class="container grid">
+      <h2 class="section__title" data-reveal>Kontakt &amp; Öffnungszeiten</h2>
+      <div class="section__body contact-grid">
+        <div class="contact-block" data-reveal>
+          <h3>Telefon &amp; E-Mail</h3>
+          <div class="stack">
+            <a class="contact-phone link" href="tel:+494086648944">040 86648944</a>
+            <a class="link" href="mailto:info@birkholz-decoration.de">info@birkholz-decoration.de</a>
+            <a class="btn" href="tel:+494086648944">Jetzt anrufen</a>
+          </div>
+        </div>
+        <div class="contact-block" data-reveal data-reveal-delay="1">
           <h3>Adresse</h3>
           <address>
             Birkholz Decoration<br>
             Elbchaussee 535<br>
             22587 Hamburg (Blankenese)
           </address>
-          <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Elbchaussee+535%2C+22587+Hamburg" target="_blank" rel="noopener noreferrer">In Google Maps öffnen ↗</a>
-          <p class="small">Der Link führt zu Google; dort gelten deren Datenschutzbestimmungen.</p>
+          <a class="contact-map link" href="https://www.google.com/maps/search/?api=1&amp;query=Elbchaussee+535%2C+22587+Hamburg" target="_blank" rel="noopener noreferrer">In Google Maps öffnen <span class="arrow" aria-hidden="true">↗</span></a>
+          <p class="contact-note">Der Link führt zu Google; dort gelten deren Datenschutzbestimmungen.</p>
         </div>
-        <div>
-          <h3>Telefon &amp; E-Mail</h3>
-          <p><a class="big" href="tel:+494086648944">040 86648944</a></p>
-          <p><a href="mailto:info@birkholz-decoration.de">info@birkholz-decoration.de</a></p>
-          <a class="btn btn-primary" href="tel:+494086648944">Jetzt anrufen</a>
-        </div>
-        <div>
+        <div class="contact-block contact-hours" data-reveal data-reveal-delay="2">
           <h3>Öffnungszeiten</h3>
           <table class="hours">
             <caption class="visually-hidden">Öffnungszeiten</caption>
@@ -410,14 +536,34 @@
 
 <!-- 6. Fußzeile -->
 <footer class="site-footer">
-  <div class="wrap">
+  <div class="container">
     <span>© Birkholz Decoration · Elbchaussee 535 · 22587 Hamburg</span>
     <nav aria-label="Rechtliches">
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
+      <a class="link" href="impressum.html">Impressum</a>
+      <a class="link" href="datenschutz.html">Datenschutz</a>
     </nav>
   </div>
 </footer>
 
+<script>
+  (function () {
+    var header = document.getElementById("kopf");
+    var onScroll = function () { header.classList.toggle("is-compact", window.scrollY > 48); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    var items = document.querySelectorAll("[data-reveal]");
+    if (!("IntersectionObserver" in window)) {
+      items.forEach(function (el) { el.classList.add("is-visible"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
 </body>
 </html>
