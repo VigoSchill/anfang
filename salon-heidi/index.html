@@ -90,12 +90,14 @@
   /* Kopf */
   .site-head { position: relative; z-index: 2; color: #fff; }
   .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: var(--head-h); border-bottom: 1px solid rgba(255, 255, 255, .2); }
-  .brand { text-decoration: none; font-weight: 700; font-size: 1rem; letter-spacing: .16em; }
+  .brand { text-decoration: none; font-weight: 700; font-size: 1rem; letter-spacing: .16em; white-space: nowrap; }
+  .head-book { margin-left: auto; font-size: .9375rem; text-decoration: none; color: rgba(255, 255, 255, .85); }
+  @media (min-width: 68rem) { .head-book { display: none; } }
   .head-call { font-weight: 600; text-decoration: none; white-space: nowrap; font-size: .9375rem; }
   .site-nav { display: none; }
-  @media (min-width: 60rem) {
+  @media (min-width: 68rem) {
     .site-nav { display: flex; gap: 2rem; font-size: .9375rem; margin-left: auto; margin-right: 1rem; }
-    .site-nav a { text-decoration: none; color: rgba(255, 255, 255, .78); transition: color .2s, background-size .5s var(--ease); padding: .25rem 0;
+    .site-nav a { white-space: nowrap; text-decoration: none; color: rgba(255, 255, 255, .78); transition: color .2s, background-size .5s var(--ease); padding: .25rem 0;
       background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; }
     .site-nav a:hover { color: #fff; background-size: 100% 1px; }
   }
@@ -149,6 +151,9 @@
   .hero-side strong { font-weight: 600; color: #fff; }
   .hero .btn { background: #fff; color: var(--ink); }
   .hero .btn:hover { background: #f1e8dd; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .hero .btn-ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .75); }
+  .hero .btn-ghost:hover { background: #fff; color: var(--ink); }
 
   /* Faktenleiste */
   .facts-bar {
@@ -197,6 +202,112 @@
   .prices dt { color: var(--muted); }
   .prices dd { margin: 0; text-align: right; }
   .services-note { margin-top: clamp(1.5rem, 3vw, 2rem); color: var(--muted); font-size: .9375rem; }
+
+
+  /* Termin buchen (Demo) */
+  #termin .booking-head { grid-column: 1 / span 4; }
+  .booking-intro { margin-top: clamp(1.25rem, 3vw, 1.75rem); color: var(--muted); max-width: 34ch; }
+  .demo-note {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: .8125rem; font-weight: 600; line-height: 1.35; color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent); padding: .45rem .7rem;
+  }
+  .booking { grid-column: 6 / span 7; min-width: 0; scroll-margin-top: 1rem; }
+  .steps { list-style: none; margin: 0 0 clamp(2rem, 5vw, 3rem); padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .375rem; }
+  .steps button {
+    width: 100%; display: block; text-align: left; padding: .7rem 0 0; min-height: 2.75rem;
+    background: none; border: 0; border-top: 1px solid var(--line); border-radius: 0;
+    font: inherit; font-size: .8125rem; color: var(--muted); cursor: default; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transition: border-color .3s, color .3s;
+  }
+  .step-nr { font-family: var(--serif); font-variation-settings: "opsz" 24; font-size: 1.0625rem; margin-right: .2rem; }
+  .steps .is-done button { border-top-color: var(--ink); color: var(--ink); cursor: pointer; }
+  .steps .is-done button:hover { color: var(--accent); }
+  .steps .is-current button { border-top: 2px solid var(--accent); padding-top: calc(.7rem - 1px); color: var(--accent); font-weight: 600; }
+  @media (max-width: 26rem) { .steps button { font-size: .75rem; } }
+
+  .booking-panel h3 { font-size: clamp(1.75rem, 4.4vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: clamp(1.25rem, 3vw, 1.75rem); outline: none; }
+  .booking-sub { margin: -.75rem 0 clamp(1.25rem, 3vw, 1.75rem); color: var(--muted); }
+  .booking-hint { margin-top: 1.25rem; color: var(--muted); font-size: .9375rem; max-width: 52ch; }
+  .link-back {
+    display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: 1.25rem; padding: 0;
+    background: none; border: 0; font: inherit; font-size: .9375rem; color: var(--ink); cursor: pointer;
+    text-decoration: underline; text-underline-offset: .22em; text-decoration-thickness: 1px;
+  }
+  .link-back:hover { color: var(--accent); }
+  .link-back::before { content: "←"; margin-right: .45rem; text-decoration: none; display: inline-block; }
+
+  /* Schritt 1: Leistungen */
+  .choices { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .choice {
+    width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    min-height: 4rem; padding: 1.15rem 0; text-align: left;
+    background: none; border: 0; border-bottom: 1px solid var(--line); border-radius: 0;
+    font: inherit; color: var(--ink); cursor: pointer;
+  }
+  .choice-name { font-family: var(--serif); font-variation-settings: "opsz" 36; font-size: clamp(1.3rem, 3.4vw, 1.75rem); letter-spacing: -0.015em; line-height: 1.2; }
+  .choice-name .placeholder { font-size: .5em; vertical-align: middle; }
+  .choice-meta { color: var(--muted); font-size: .9375rem; white-space: nowrap; }
+  .choice:hover .choice-name, .choice.is-selected .choice-name { color: var(--accent); }
+
+  /* Schritt 2: Kalender */
+  .cal { max-width: 30rem; }
+  .cal-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 30rem; margin-bottom: 1rem; }
+  .cal-month { margin: 0; font-family: var(--serif); font-variation-settings: "opsz" 36; font-size: 1.375rem; letter-spacing: -0.01em; }
+  .cal-nav { display: flex; gap: .5rem; }
+  .cal-nav button {
+    width: 2.75rem; height: 2.75rem; display: grid; place-items: center; padding: 0;
+    background: none; border: 0; box-shadow: inset 0 0 0 1px var(--ink); color: var(--ink); cursor: pointer;
+    transition: background-color .2s, color .2s;
+  }
+  .cal-nav button svg { width: 1.1rem; height: 1.1rem; }
+  .cal-nav button:hover { background: var(--ink); color: #fff; }
+  .cal-nav button:disabled { box-shadow: inset 0 0 0 1px var(--line); color: var(--line); background: none; cursor: default; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; max-width: 30rem; }
+  .cal-wd { font-size: .75rem; color: var(--muted); text-align: center; padding-bottom: .4rem; }
+  .cal-day {
+    aspect-ratio: 1 / 1; min-height: 2.75rem; padding: 0; position: relative;
+    background: none; border: 0; border-radius: 0; font: inherit; font-size: 1rem; color: #b3aaa0;
+    font-variant-numeric: tabular-nums;
+  }
+  .cal-day.is-open { background: var(--tint); color: var(--ink); font-weight: 600; cursor: pointer; transition: background-color .2s, color .2s; }
+  .cal-day.is-open:hover { background: var(--ink); color: #fff; }
+  .cal-day.is-full { text-decoration: line-through; color: var(--muted); }
+  .cal-day.is-today::after { content: ""; position: absolute; left: 35%; right: 35%; bottom: 18%; height: 1px; background: currentColor; }
+  .cal-day.is-selected { background: var(--accent); color: #fff; }
+
+  /* Schritt 3: Uhrzeiten */
+  .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(4.75rem, 1fr)); gap: .5rem; max-width: 34rem; }
+  .slot {
+    min-height: 3rem; padding: 0; background: none; border: 0; border-radius: 0;
+    box-shadow: inset 0 0 0 1px var(--ink); font: inherit; font-weight: 600; color: var(--ink);
+    font-variant-numeric: tabular-nums; cursor: pointer; transition: background-color .2s, color .2s;
+  }
+  .slot:hover { background: var(--ink); color: #fff; }
+  .slot:disabled { box-shadow: none; background: var(--tint); color: #a39a90; font-weight: 400; text-decoration: line-through; cursor: default; }
+  .slot.is-selected { background: var(--accent); box-shadow: none; color: #fff; }
+
+  /* Schritt 4: Angaben */
+  .booking-form { max-width: 30rem; display: grid; gap: 1.5rem; }
+  .field label { display: block; font-size: .875rem; font-weight: 600; margin-bottom: .25rem; }
+  .field input {
+    width: 100%; min-height: 3.25rem; padding: .5rem 0;
+    background: transparent; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0;
+    font: inherit; font-size: 1.125rem; color: var(--ink);
+  }
+  .field input:focus { outline: none; border-bottom: 2px solid var(--accent); padding-bottom: calc(.5rem - 1px); }
+  .field input[aria-invalid="true"] { border-bottom-color: var(--accent); }
+  .field-hint { margin: .4rem 0 0; font-size: .875rem; color: var(--muted); }
+  .form-error { margin: 0; color: var(--accent); font-weight: 600; font-size: .9375rem; }
+  .form-error:empty { display: none; }
+  .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.75rem; }
+  .form-actions .link-back { margin-top: 0; }
+  .btn:disabled { opacity: .6; cursor: default; }
+
+  /* Schritt 5: Bestätigung */
+  .confirm-title { color: var(--accent); }
+  .booking-panel .facts { max-width: 34rem; margin: 0 0 .5rem; }
+  .booking-panel .btn-line { margin-top: 1.75rem; }
 
   /* Über uns */
   #ueber-uns .sec-head { grid-column: 1 / span 4; }
@@ -289,6 +400,10 @@
     @keyframes hero-settle { from { transform: scale(1.12); filter: brightness(.7); } to { transform: none; filter: none; } }
     @keyframes hero-rise { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
 
+    /* Buchung: neuer Schritt blendet kurz ein */
+    .panel-step { animation: step-in .5s cubic-bezier(.16, 1, .3, 1) both; }
+    @keyframes step-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
     /* Fotos zoomen beim Überfahren leicht heran */
     .frame img { transition: transform 1.2s cubic-bezier(.16, 1, .3, 1); }
     @media (hover: hover) { .photo:hover .frame img, .frame:hover img { transform: scale(1.045); } }
@@ -348,11 +463,13 @@
     <a class="brand" href="#start" aria-label="Salon Heidi – zum Seitenanfang">SALON HEIDI</a>
     <nav class="site-nav" aria-label="Hauptnavigation">
       <a href="#leistungen">Leistungen</a>
+      <a href="#termin">Termin buchen</a>
       <a href="#ueber-uns">Über uns</a>
       <a href="#galerie">Galerie</a>
       <a href="#kundenstimmen">Kundenstimmen</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
+    <a class="head-book" href="#termin">Termin</a>
     <a class="head-call" href="tel:+4940828814">040 828814</a>
   </div>
 </header>
@@ -370,10 +487,13 @@
         <p class="hero-sub">Für Damen und Herren aus dem Stadtteil und der Umgebung.</p>
         <div class="hero-side">
           <p><strong>Salon Heidi</strong> – seit 2019 geführt von Friseurmeisterin Anne Brümmer. Name und Telefonnummer sind <span class="nowrap">geblieben</span>.</p>
+          <div class="hero-actions">
           <a class="btn" href="tel:+4940828814">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.1 1.5 1.5 0 0 1 5 3.5Z"/></svg>
             Jetzt anrufen
           </a>
+          <a class="btn btn-ghost" href="#termin">Termin online buchen</a>
+          </div>
         </div>
       </div>
       <ul class="facts-bar" aria-label="Kurzfakten">
@@ -425,6 +545,28 @@
           </li>
         </ul>
         <p class="services-note">Fragen zu Leistungen und Terminen beantworten wir gern am Telefon: <a href="tel:+4940828814" class="nowrap">040 828814</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="termin" aria-labelledby="termin-title">
+    <div class="wrap grid">
+      <div class="sec-head booking-head">
+        <h2 id="termin-title">Termin buchen</h2>
+        <p class="booking-intro">Leistung, Tag und Uhrzeit wählen, Namen und Telefonnummer eintragen – fertig. Lieber persönlich? Rufen Sie an: <a href="tel:+4940828814" class="nowrap">040 828814</a>.</p>
+        <p class="demo-note" role="note">Demo – Buchungen werden nicht übermittelt</p>
+      </div>
+      <div class="booking" id="buchung">
+        <ol class="steps" aria-label="Schritte der Buchung">
+          <li><button type="button" disabled><span class="step-nr">1</span> Leistung</button></li>
+          <li><button type="button" disabled><span class="step-nr">2</span> Tag</button></li>
+          <li><button type="button" disabled><span class="step-nr">3</span> Uhrzeit</button></li>
+          <li><button type="button" disabled><span class="step-nr">4</span> Angaben</button></li>
+          <li><button type="button" disabled><span class="step-nr">5</span> Fertig</button></li>
+        </ol>
+        <div class="booking-panel" aria-live="polite">
+          <p class="booking-hint">Die Online-Buchung benötigt JavaScript. Bitte rufen Sie uns an: <a href="tel:+4940828814">040 828814</a>.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -553,7 +695,7 @@
     if (!root.classList.contains('reveal')) return;
 
     var targets = document.querySelectorAll(
-      'section:not(.hero) h2, .services li, .services-note, .about-text, .facts, .frame, .photo figcaption, .review, .reviews-foot, .contact-phone, .contact-meta > div'
+      'section:not(.hero) h2, .booking-head p, .booking, .services li, .services-note, .about-text, .facts, .frame, .photo figcaption, .review, .reviews-foot, .contact-phone, .contact-meta > div'
     );
     for (var i = 0; i < targets.length; i++) targets[i].setAttribute('data-reveal', '');
 
@@ -595,5 +737,7 @@
     if (mq.addEventListener) mq.addEventListener('change', showAll);
   })();
 </script>
+<script src="js/termine-daten.js"></script>
+<script src="js/buchung.js"></script>
 </body>
 </html>
