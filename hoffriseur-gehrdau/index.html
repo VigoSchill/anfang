@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoffriseur Stephan Gehrdau – Friseur für Damen und Herren in Blankenese</title>
+<meta name="description" content="Hoffriseur Stephan Gehrdau – Ihr Friseur für Damen und Herren an der Blankeneser Bahnhofstraße 11 in Hamburg-Blankenese, nahe dem S-Bahnhof. Termine telefonisch unter 040 86 66 35 81.">
+<!-- TODO: noindex entfernen, sobald die Seite offiziell live geht (wie bei den anderen Entwürfen). -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1b2228">
+<style>
+  /* Schriften lokal eingebunden – keine Verbindung zu externen Servern */
+  @font-face {
+    font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap;
+    src: url("fonts/fraunces-latin-opsz-normal.woff2") format("woff2-variations"),
+         url("fonts/fraunces-latin-opsz-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Fraunces"; font-style: italic; font-weight: 100 900; font-display: swap;
+    src: url("fonts/fraunces-latin-opsz-italic.woff2") format("woff2-variations"),
+         url("fonts/fraunces-latin-opsz-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Hanken Grotesk"; font-style: normal; font-weight: 100 900; font-display: swap;
+    src: url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2-variations"),
+         url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");
+  }
+
+  :root {
+    --bg: #f8f6f2;           /* helles Leinen, ruhig wie Elbsand */
+    --ink: #1a1d20;
+    --muted: #5d6166;
+    --line: #e3dfd7;
+    --accent: #2c3f4b;       /* Schieferblau der Elbe am Abend – einziger Akzent, Gegenpol zu Holz und Cognac-Leder */
+    --accent-hover: #22323c;
+    --accent-ink: #ffffff;
+    --accent-soft: #bccad3;
+    --tint: #eceeee;
+    --head-h: 4.5rem;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --wrap: 80rem;
+    --gutter: clamp(1.25rem, 5vw, 4rem);
+    --section: clamp(5rem, 13vw, 10rem);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1rem; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+  p { margin: 0 0 1em; }
+  p:last-child { margin-bottom: 0; }
+  h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+  h1, h2, h3 { font-family: var(--serif); font-variation-settings: "opsz" 48; }
+
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  @media (min-width: 60rem) {
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1.25rem, 2.5vw, 2.5rem); }
+  }
+
+  /* Entwurfs-Hinweis */
+  .draft-bar {
+    background: var(--ink); color: #fff;
+    font-size: .8125rem; line-height: 1.4; text-align: center;
+    padding: .5rem var(--gutter);
+  }
+
+  /* Kopf */
+  .site-head { position: relative; z-index: 2; color: #fff; }
+  .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; min-height: var(--head-h); border-bottom: 1px solid rgba(255, 255, 255, .2); }
+  .brand { text-decoration: none; font-weight: 700; font-size: .9375rem; letter-spacing: .16em; line-height: 1.2; }
+  .head-call { font-weight: 600; text-decoration: none; white-space: nowrap; font-size: .9375rem; }
+  .site-nav { display: none; }
+  @media (min-width: 60rem) {
+    .brand { font-size: 1rem; }
+    .site-nav { display: flex; gap: 2rem; font-size: .9375rem; margin-left: auto; margin-right: 1rem; }
+    .site-nav a { text-decoration: none; color: rgba(255, 255, 255, .78); transition: color .2s, background-size .5s var(--ease); padding: .25rem 0;
+      background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; }
+    .site-nav a:hover { color: #fff; background-size: 100% 1px; }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .65rem;
+    min-height: 3.25rem; padding: .8rem 1.6rem;
+    background: var(--accent); color: var(--accent-ink);
+    font: inherit; font-weight: 600; font-size: 1rem; text-decoration: none;
+    transition: background-color .2s, color .2s;
+    user-select: none;
+  }
+  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
+  .btn:hover { background: var(--accent-hover); }
+  .btn-line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .btn-line:hover, .btn-line:active { background: var(--ink); color: #fff; }
+
+  /* Start – Foto als Hintergrund mit dunklem Overlay */
+  .hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    margin-top: calc(-1 * var(--head-h));
+    padding: calc(var(--head-h) + clamp(6rem, 20vh, 12rem)) 0 0;
+    min-height: min(100svh, 62rem);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    color: #fff; background: #1b2228;
+  }
+  .hero-bg { position: absolute; inset: 0; z-index: -2; margin: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; display: block; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(16, 21, 25, .72) 0%, rgba(16, 21, 25, .42) 25%, rgba(16, 21, 25, .55) 50%, rgba(16, 21, 25, .93) 100%),
+      linear-gradient(90deg, rgba(16, 21, 25, .65) 0%, rgba(16, 21, 25, .3) 50%, rgba(16, 21, 25, .1) 80%);
+  }
+  .hero-kicker {
+    grid-column: 1 / span 10;
+    margin: 0 0 clamp(.9rem, 2vw, 1.25rem);
+    font-size: .8125rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(255, 255, 255, .78);
+  }
+  .hero h1 {
+    grid-column: 1 / span 10;
+    font-size: clamp(2.6rem, 8vw, 5.4rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+  }
+  .hero h1 em { font-weight: 380; }
+  .hero-sub {
+    grid-column: 1 / span 5; grid-row: 3;
+    margin: clamp(1.1rem, 2.5vw, 1.5rem) 0 0;
+    font-size: clamp(1.125rem, 2.8vw, 1.375rem);
+    line-height: 1.45;
+    color: rgba(255, 255, 255, .88);
+    max-width: 40ch;
+  }
+  .hero-side { grid-column: 7 / span 5; grid-row: 3; margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+  .hero-side p { font-size: clamp(1.0625rem, 2.6vw, 1.1875rem); line-height: 1.6; max-width: 38ch; margin-bottom: 2rem; color: rgba(255, 255, 255, .92); }
+  .hero-side strong { font-weight: 600; color: #fff; }
+  .hero .btn { background: #fff; color: var(--ink); }
+  .hero .btn:hover { background: #ece8e1; }
+
+  /* Faktenleiste */
+  .facts-bar {
+    list-style: none; padding: 0; margin: clamp(3rem, 8vw, 5.5rem) 0 0;
+    display: grid; border-top: 1px solid rgba(255, 255, 255, .4);
+  }
+  .facts-bar li { display: flex; align-items: center; gap: .7rem; padding: 1.05rem 0; font-size: .9375rem; color: rgba(255, 255, 255, .92); }
+  .facts-bar li + li { border-top: 1px solid rgba(255, 255, 255, .16); }
+  .facts-bar a { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; }
+  .facts-bar a span:last-child { text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .4); }
+  .facts-bar a:hover span:last-child { text-decoration-color: #fff; }
+  @media (min-width: 44rem) {
+    .facts-bar { grid-template-columns: repeat(3, auto); justify-content: space-between; padding-bottom: .6rem; }
+    .facts-bar li + li { border-top: 0; }
+  }
+  .stars { display: inline-flex; gap: 2px; color: #fff; flex: none; }
+  .stars svg { width: .9rem; height: .9rem; }
+
+  /* Fotos */
+  .frame { margin: 0; overflow: hidden; background: var(--tint); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo { margin: 0; }
+  .photo figcaption { margin-top: .7rem; font-size: .875rem; color: var(--muted); }
+
+  /* Abschnitte */
+  section { padding: var(--section) 0 0; }
+  h2 {
+    font-size: clamp(2.6rem, 7.5vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .sec-head { margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+  .sec-img { margin-top: clamp(2rem, 5vw, 3.5rem); aspect-ratio: 4 / 3; }
+  @media (min-width: 60rem) { .sec-img { aspect-ratio: 3 / 4; max-width: 22rem; } }
+
+  /* Über uns */
+  #ueber-uns .sec-head { grid-column: 1 / span 4; }
+  .about-text { grid-column: 6 / span 7; }
+  .about-text .about-lead { font-family: var(--serif); font-variation-settings: "opsz" 36; font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.25; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 1.5em; }
+  .about-text p:not(.about-lead) { max-width: 60ch; color: var(--muted); }
+  .facts { list-style: none; margin: 2.5rem 0 0; padding: 0; border-top: 1px solid var(--ink); font-size: .9375rem; }
+  .facts li { display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); }
+  .facts span:first-child { color: var(--muted); }
+  .facts span:last-child { text-align: right; }
+  .about-photo { margin-top: clamp(2.5rem, 6vw, 3.5rem); max-width: 26rem; }
+  .about-photo .frame { aspect-ratio: 4 / 3; }
+
+  /* Leistungen */
+  #leistungen .sec-head { grid-column: 1 / span 4; }
+  .services-col { grid-column: 6 / span 7; }
+  .services { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .services li { padding: clamp(1.5rem, 3.5vw, 2.25rem) 0; border-bottom: 1px solid var(--line); display: grid; gap: .5rem; }
+  @media (min-width: 44rem) { .services li { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: baseline; } }
+  .services h3 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.05; }
+  .services p { color: var(--muted); max-width: 36ch; }
+  .services-note { margin-top: clamp(1.75rem, 4vw, 2.5rem); color: var(--muted); max-width: 52ch; }
+  .services-note a { color: var(--ink); font-weight: 600; }
+
+  /* Galerie */
+  #salon .sec-head { grid-column: 1 / span 6; }
+  .gallery { display: grid; gap: clamp(1.25rem, 2.2vw, 2rem); }
+  .gallery .frame { aspect-ratio: 4 / 3; }
+  .gallery .g-b .frame { aspect-ratio: 4 / 5; }
+  @media (min-width: 44rem) {
+    .gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .g-a { grid-column: 1 / 8; display: flex; flex-direction: column; }
+    .g-a .frame { aspect-ratio: auto; flex: 1; min-height: 18rem; }
+    .g-b { grid-column: 8 / 13; }
+  }
+
+  /* Öffnungszeiten */
+  #oeffnungszeiten .sec-head { grid-column: 1 / span 4; }
+  .hours-note { margin-top: 1.5rem; color: var(--muted); max-width: 32ch; }
+  .hours { grid-column: 6 / span 7; margin: 0; border-top: 1px solid var(--ink); }
+  .hours > div { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .25rem 1.5rem; padding: clamp(1.25rem, 3vw, 1.85rem) 0; border-bottom: 1px solid var(--line); }
+  .hours dt { font-family: var(--serif); font-variation-settings: "opsz" 48; font-size: clamp(1.7rem, 4.2vw, 2.6rem); letter-spacing: -0.025em; line-height: 1.1; }
+  .hours dd { margin: 0; font-size: clamp(1.0625rem, 2.4vw, 1.25rem); font-variant-numeric: tabular-nums; }
+  .hours .closed dd { color: var(--muted); }
+  .today-tag {
+    display: inline-block; vertical-align: middle; margin-left: .6rem;
+    font-family: var(--sans); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent-ink); background: var(--accent); padding: .2em .6em; line-height: 1.4;
+    position: relative; top: -.15em;
+  }
+
+  /* Kontakt und Anfahrt */
+  .contact { background: var(--accent); color: #fff; margin-top: var(--section); padding-bottom: clamp(4rem, 10vw, 7rem); }
+  .contact h2 { grid-column: 1 / span 8; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .contact-phone { grid-column: 1 / span 7; }
+  .contact-meta { grid-column: 8 / span 5; display: grid; gap: 2rem; align-content: start; }
+  .contact h3 { font-family: var(--sans); font-size: .875rem; font-weight: 600; color: var(--accent-soft); margin-bottom: .5rem; }
+  .phone-big {
+    display: inline-block; font-family: var(--serif); font-variation-settings: "opsz" 36;
+    font-size: clamp(2.3rem, 9.5vw, 5.5rem); font-weight: 380; letter-spacing: -0.03em; line-height: 1;
+    text-decoration: none; color: #fff; padding-bottom: .12em; white-space: nowrap;
+  }
+  .phone-big:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+  .contact-phone > p { margin-top: 1.25rem; color: var(--accent-soft); max-width: 40ch; }
+  .contact-photo { margin-top: clamp(2.5rem, 6vw, 4rem); max-width: 24rem; }
+  .contact-photo .frame { aspect-ratio: 1 / 1; background: rgba(255, 255, 255, .08); }
+  .contact-photo figcaption { color: var(--accent-soft); }
+  .contact address { font-style: normal; }
+  .contact .mt { margin-top: 1rem; }
+  .contact a:not(.phone-big) { color: #fff; }
+  @media (max-width: 59.99rem) { .contact-meta { margin-top: 3rem; } }
+
+  /* Fuß */
+  .site-foot { background: var(--accent); color: var(--accent-soft); font-size: .875rem; border-top: 1px solid rgba(255, 255, 255, .2); }
+  .site-foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; padding-top: 1.5rem; padding-bottom: 2rem; }
+  .site-foot nav { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
+  .site-foot a { color: #fff; }
+
+  .nowrap { white-space: nowrap; }
+
+  /* ---------- Bewegung ----------
+     Alles hier gilt nur, wenn keine reduzierte Bewegung eingestellt ist. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .btn { transition: background-color .25s, color .25s, transform .4s var(--ease); }
+    .btn:active { transform: scale(.98); transition-duration: .08s; }
+    .btn svg { transition: transform .4s var(--ease); }
+    @media (hover: hover) { .btn:hover svg { transform: rotate(-8deg); } }
+    .phone-big:hover { text-decoration: none; }
+    .phone-big { background: linear-gradient(currentColor, currentColor) left 100% / 0 2px no-repeat; transition: background-size .6s var(--ease); }
+    .phone-big:hover, .phone-big:focus-visible { background-size: 100% 2px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Startbereich: Foto setzt sich, Text steigt gestaffelt auf */
+    .hero-bg img { animation: hero-settle 2.6s cubic-bezier(.22, 1, .36, 1) both; }
+    .hero-kicker, .hero h1, .hero-sub, .hero-side, .facts-bar { animation: hero-rise 1.1s cubic-bezier(.16, 1, .3, 1) both; }
+    .hero-kicker { animation-delay: .05s; }
+    .hero h1 { animation-delay: .15s; }
+    .hero-sub { animation-delay: .35s; }
+    .hero-side { animation-delay: .5s; }
+    .facts-bar { animation-delay: .7s; }
+    @keyframes hero-settle { from { transform: scale(1.12); filter: brightness(.7); } to { transform: none; filter: none; } }
+    @keyframes hero-rise { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+
+    /* Fotos zoomen beim Überfahren leicht heran */
+    .frame img { transition: transform 1.2s cubic-bezier(.16, 1, .3, 1); }
+    @media (hover: hover) { .photo:hover .frame img, .frame:hover img { transform: scale(1.045); } }
+  }
+
+  /* Ein- und Ausblenden beim Scrollen (IntersectionObserver, Script am Seitenende).
+     Elemente blenden beim Hereinkommen ein und beim Verlassen wieder aus –
+     beim Runterscrollen von unten, beim Hochscrollen von oben.
+     Fotos öffnen sich dabei wie ein Vorhang.
+     Die Klasse .reveal setzt nur das Script – ohne JavaScript oder bei
+     reduzierter Bewegung bleibt alles sofort sichtbar. */
+  .reveal [data-reveal] {
+    transition: opacity .75s cubic-bezier(.16, 1, .3, 1), transform .75s cubic-bezier(.16, 1, .3, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .reveal [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(32px);
+    transition-duration: .4s;   /* Ausblenden etwas schneller */
+    transition-delay: 0s;
+  }
+  .reveal [data-reveal][data-side="above"]:not(.is-in) { transform: translateY(-32px); }
+
+  .reveal .frame[data-reveal] {
+    transition: clip-path 1.1s cubic-bezier(.65, 0, .35, 1), opacity .6s ease;
+    transition-delay: var(--reveal-delay, 0s);
+    clip-path: inset(0 0 0 0);
+  }
+  .reveal .frame[data-reveal]:not(.is-in) {
+    opacity: .001; transform: none;
+    clip-path: inset(30% 0 0 0);
+    transition-duration: .5s; transition-delay: 0s;
+  }
+  .reveal .frame[data-reveal][data-side="above"]:not(.is-in) { clip-path: inset(0 0 30% 0); }
+  .reveal .frame[data-reveal] img { transition: transform 1.4s cubic-bezier(.16, 1, .3, 1); transition-delay: var(--reveal-delay, 0s); }
+  .reveal .frame[data-reveal]:not(.is-in) img { transform: scale(1.15); transition-duration: .5s; transition-delay: 0s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal [data-reveal], .reveal [data-reveal]:not(.is-in),
+    .reveal .frame[data-reveal]:not(.is-in), .reveal .frame[data-reveal] img { opacity: 1; transform: none; clip-path: none; transition: none; }
+  }
+  @media print { .reveal [data-reveal] { opacity: 1 !important; transform: none !important; clip-path: none !important; } }
+</style>
+<script>
+  // Früh setzen, damit nichts aufblitzt: nur mit Observer-Support und ohne reduzierte Bewegung
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reveal');
+  }
+</script>
+</head>
+<body>
+
+<div class="draft-bar" role="note">Entwurf – nicht die offizielle Website von Hoffriseur Stephan Gehrdau</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#start" aria-label="Hoffriseur Stephan Gehrdau – zum Seitenanfang">HOFFRISEUR<br>GEHRDAU</a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="head-call" href="tel:+494086663581">040 86 66 35 81</a>
+  </div>
+</header>
+
+<main id="start">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <figure class="hero-bg">
+      <!-- TODO: Hero-Foto in höherer Auflösung (mind. 2000 px breit) nachliefern – die vorhandene Datei hat nur 414 × 414 px und wirkt auf großen Bildschirmen unscharf. Dann wie bei remo-elb srcset mit start-1000/start-2000 ergänzen. -->
+      <img src="img/start-414.jpg" alt="Hände waschen und massieren eingeschäumtes, dunkles Haar am Waschbecken"
+           fetchpriority="high" width="414" height="414">
+    </figure>
+    <div class="wrap">
+      <div class="grid">
+        <p class="hero-kicker">Friseur in Blankenese</p>
+        <h1 id="hero-title">Hoffriseur <em>Stephan Gehrdau</em></h1>
+        <p class="hero-sub">Ihr Salon für Damen und Herren, in Ruhe und mit persönlicher Beratung.</p>
+        <div class="hero-side">
+          <p><strong>Termine vereinbaren Sie bitte telefonisch.</strong> Sie finden uns an der Blankeneser Bahnhofstraße 11, nahe dem S-Bahnhof Blankenese.</p>
+          <a class="btn" href="tel:+494086663581">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.1 1.5 1.5 0 0 1 5 3.5Z"/></svg>
+            Jetzt anrufen
+          </a>
+        </div>
+      </div>
+      <ul class="facts-bar" aria-label="Kurzfakten">
+        <li>
+          <!-- TODO: Direktlink zum Google-Maps-Eintrag (Ortslink mit Bewertungen) einsetzen, sobald bekannt – aktuell eine Suchanfrage nach Name und Adresse. Bewertungsstand vor Livegang aktualisieren. -->
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Hoffriseur+Stephan+Gehrdau%2C+Blankeneser+Bahnhofstra%C3%9Fe+11%2C+22587+Hamburg" target="_blank" rel="noopener noreferrer">
+            <span class="stars" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+              <!-- 4,6 Sterne: fünfter Stern zu 60 % gefüllt -->
+              <svg viewBox="0 0 20 20"><defs><linearGradient id="star-part"><stop offset=".6" stop-color="currentColor"/><stop offset=".6" stop-color="currentColor" stop-opacity=".3"/></linearGradient></defs><path fill="url(#star-part)" d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+            </span>
+            <span>4,6 Sterne bei 21 Google-Bewertungen</span>
+          </a>
+        </li>
+        <li>Damen und Herren</li>
+        <li>Nahe S-Bahnhof Blankenese</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ueber-uns" aria-labelledby="ueber-title">
+    <div class="wrap grid">
+      <div class="sec-head">
+        <h2 id="ueber-title">Über uns</h2>
+        <ul class="facts">
+          <li><span>Salon</span><span>Damen und Herren</span></li>
+          <li><span>Lage</span><span>Blankeneser Bahnhofstraße 11</span></li>
+          <li><span>Termine</span><span>telefonisch</span></li>
+        </ul>
+        <figure class="frame sec-img">
+          <img src="img/bedienplaetze-414.jpg" alt="Heller Salonraum mit Holzboden, cognacfarbenen Frisierstühlen, Spiegeln an Holzkonsolen und Sonnenblumen in einer hohen Vase"
+               loading="lazy" width="414" height="414">
+        </figure>
+      </div>
+      <div class="about-text">
+        <!-- TODO: Text zum Salon vom Inhaber bestätigen oder ergänzen lassen (z. B. Geschichte, Schwerpunkte, Team). Bewusst ohne Gründungsjahr, Titel und Namen formuliert. -->
+        <p class="about-lead">Ein Friseursalon mitten in Blankenese, an der Bahnhofstraße und nahe dem S-Bahnhof.</p>
+        <p>Bei uns sind Damen und Herren gleichermaßen willkommen. Im hellen Salon mit warmem Holz, Bildern an den Wänden und bequemen Plätzen am Waschbecken nehmen wir uns Zeit für ein Gespräch, bevor die Schere angesetzt wird.</p>
+        <p>Termine vergeben wir persönlich am Telefon. So können wir direkt besprechen, was Sie sich wünschen, und den passenden Zeitpunkt für Sie finden.</p>
+        <figure class="photo about-photo">
+          <div class="frame"><img src="img/urkunde-414.jpg" alt="Gerahmte Ehrenurkunde der Handwerkskammer Hamburg zum 25-jährigen Bestehen des Friseurbetriebes Stephan Gehrdau, datiert 13. Oktober 2022"
+               loading="lazy" width="414" height="414"></div>
+          <!-- TODO: Mit dem Inhaber klären, ob das Jubiläum (25 Jahre laut Urkunde von 2022) auch im Text genannt werden soll. -->
+          <figcaption>Ehrenurkunde der Handwerkskammer Hamburg</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="leistungen" aria-labelledby="leistungen-title">
+    <div class="wrap grid">
+      <div class="sec-head">
+        <h2 id="leistungen-title">Leistungen</h2>
+        <figure class="frame sec-img">
+          <img src="img/waschplaetze-414.jpg" alt="Zwei Waschplätze mit weißen Becken und braunen Lederliegen, dahinter ein großes Gemälde an einer Natursteinwand"
+               loading="lazy" width="414" height="414">
+        </figure>
+      </div>
+      <div class="services-col">
+        <!-- TODO: Leistungsbeschreibungen vom Salon bestätigen lassen (z. B. Strähnen, Dauerwelle, Bartpflege?). Keine Preise, wie vorgegeben. -->
+        <ul class="services">
+          <li>
+            <h3>Damen</h3>
+            <p>Waschen, Schneiden und Föhnen – mit Beratung zu Schnitt und Frisur.</p>
+          </li>
+          <li>
+            <h3>Herren</h3>
+            <p>Haarschnitte für Herren, klassisch oder modern.</p>
+          </li>
+          <li>
+            <h3>Farbe</h3>
+            <p>Färben und Tönen, abgestimmt auf Ihren Typ und Ihre Wünsche.</p>
+          </li>
+        </ul>
+        <p class="services-note">Fragen zu Leistungen und Terminen beantworten wir gern am Telefon: <a href="tel:+494086663581" class="nowrap">040 86 66 35 81</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="salon" aria-labelledby="salon-title">
+    <div class="wrap">
+      <div class="grid">
+        <div class="sec-head">
+          <h2 id="salon-title">Der Salon</h2>
+        </div>
+      </div>
+      <!-- TODO: Fotos in höherer Auflösung nachliefern (aktuell 414 × 414 px). -->
+      <div class="gallery">
+        <figure class="photo g-a">
+          <div class="frame"><img src="img/gemaelde-414.jpg" alt="Gerahmtes Gemälde einer Strandlandschaft mit Dünen und Wolkenhimmel an einer hellen Natursteinwand"
+               loading="lazy" width="414" height="414"></div>
+          <figcaption>Kunst an der Natursteinwand</figcaption>
+        </figure>
+        <figure class="photo g-b">
+          <div class="frame"><img src="img/produkte-414.jpg" alt="Glasregal in einem Holzrahmen mit weißen Pflegeprodukten, Föhn und Glätteisen"
+               loading="lazy" width="414" height="414"></div>
+          <figcaption>Pflegeprodukte im Salon</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="oeffnungszeiten" aria-labelledby="zeiten-title">
+    <div class="wrap grid">
+      <div class="sec-head">
+        <h2 id="zeiten-title">Öffnungs&shy;zeiten</h2>
+        <p class="hours-note">Termine vereinbaren Sie bitte telefonisch unter <a href="tel:+494086663581" class="nowrap">040 86 66 35 81</a>. Eine Online-Buchung gibt es nicht.</p>
+      </div>
+      <!-- TODO: Auf der Ladentür steht zusätzlich ein Hinweis zu Terminen nach 18 Uhr nach Vereinbarung – klären, ob dieser auf die Website soll. -->
+      <dl class="hours">
+        <div data-days="1,2,3,4,5"><dt>Montag – Freitag</dt><dd>09:00 – 18:00 Uhr</dd></div>
+        <div data-days="6"><dt>Samstag</dt><dd>08:30 – 14:00 Uhr</dd></div>
+        <div data-days="0" class="closed"><dt>Sonntag</dt><dd>geschlossen</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="kontakt" class="contact" aria-labelledby="kontakt-title">
+    <div class="wrap grid">
+      <h2 id="kontakt-title">Kontakt und Anfahrt</h2>
+      <div class="contact-phone">
+        <h3>Telefon</h3>
+        <a class="phone-big" href="tel:+494086663581">040 86 66 35 81</a>
+        <p>Termine vergeben wir ausschließlich telefonisch. Rufen Sie uns während der Öffnungszeiten gern an.</p>
+        <!-- TODO: E-Mail-Adresse ergänzen, falls vorhanden (sonst weglassen). -->
+        <figure class="photo contact-photo">
+          <div class="frame"><img src="img/eingang-414.jpg" alt="Weiße Eingangstür des Salons mit der Aufschrift Hoffriseur Stephan Gehrdau, Damen und Herren, und den Öffnungszeiten auf dem Glas"
+               loading="lazy" width="414" height="414"></div>
+          <figcaption>Unser Eingang an der Blankeneser Bahnhofstraße</figcaption>
+        </figure>
+      </div>
+      <div class="contact-meta">
+        <div>
+          <h3>Adresse</h3>
+          <address>Hoffriseur Stephan Gehrdau<br>Blankeneser Bahnhofstraße 11<br>22587 Hamburg</address>
+          <p class="mt"><a href="https://www.google.com/maps/search/?api=1&amp;query=Hoffriseur+Stephan+Gehrdau%2C+Blankeneser+Bahnhofstra%C3%9Fe+11%2C+22587+Hamburg" target="_blank" rel="noopener noreferrer">In Google Maps öffnen</a></p>
+        </div>
+        <div>
+          <h3>Anfahrt</h3>
+          <p>Der Salon liegt an der Blankeneser Bahnhofstraße, nahe dem S-Bahnhof Blankenese.</p>
+        </div>
+        <div>
+          <h3>Öffnungszeiten</h3>
+          <p>Mo–Fr 09:00–18:00 Uhr<br>Sa 08:30–14:00 Uhr<br>So geschlossen</p>
+        </div>
+        <div>
+          <h3>Facebook</h3>
+          <p><a href="https://www.facebook.com/HoffriseurBlankenese/" target="_blank" rel="noopener noreferrer">Hoffriseur Blankenese auf Facebook</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© Hoffriseur Stephan Gehrdau · Friseur in Blankenese</span>
+    <nav aria-label="Rechtliches und Links">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="https://www.facebook.com/HoffriseurBlankenese/" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Heutigen Tag in den Öffnungszeiten markieren (Hamburger Zeit)
+  (function () {
+    var day;
+    try {
+      var name = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'Europe/Berlin' }).format(new Date());
+      day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(name);
+    } catch (e) { day = new Date().getDay(); }
+    var rows = document.querySelectorAll('.hours [data-days]');
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].getAttribute('data-days').split(',').indexOf(String(day)) > -1) {
+        var tag = document.createElement('span');
+        tag.className = 'today-tag';
+        tag.textContent = 'Heute';
+        rows[i].querySelector('dt').appendChild(tag);
+      }
+    }
+  })();
+
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('reveal')) return;
+
+    var targets = document.querySelectorAll(
+      'section:not(.hero) h2, .services li, .services-note, .about-text > p, .facts, .hours > div, .hours-note, .frame, .photo figcaption, .contact-phone > h3, .contact-phone > a, .contact-phone > p, .contact-meta > div'
+    );
+    for (var i = 0; i < targets.length; i++) targets[i].setAttribute('data-reveal', '');
+
+    var STAGGER = 0.07; // Sekunden zwischen Elementen derselben Zeile
+
+    var io = new IntersectionObserver(function (entries) {
+      var entering = [];
+      entries.forEach(function (entry) {
+        var el = entry.target;
+        if (entry.isIntersecting) {
+          entering.push(entry);
+        } else {
+          // Verlassen: merken, auf welcher Seite das Element liegt –
+          // von dort blendet es beim nächsten Hereinkommen ein
+          el.setAttribute('data-side', entry.boundingClientRect.top < 0 ? 'above' : 'below');
+          el.style.removeProperty('--reveal-delay');
+          el.classList.remove('is-in');
+        }
+      });
+      // Von oben nach unten, links nach rechts – Elemente einer Zeile erhalten steigende Verzögerung
+      entering.sort(function (a, b) {
+        return (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left);
+      });
+      var rowTop = null, index = 0;
+      entering.forEach(function (entry) {
+        var top = entry.boundingClientRect.top;
+        if (rowTop === null || Math.abs(top - rowTop) > 8) { rowTop = top; index = 0; }
+        entry.target.style.setProperty('--reveal-delay', Math.min(index, 3) * STAGGER + 's');
+        entry.target.classList.add('is-in');
+        index++;
+      });
+    }, { rootMargin: '0px 0px -6% 0px' });
+
+    for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
+
+    // Wechselt der Nutzer zu „Bewegung reduzieren“, alles sofort zeigen
+    var mq = matchMedia('(prefers-reduced-motion: reduce)');
+    var showAll = function () { if (mq.matches) { io.disconnect(); root.classList.remove('reveal'); } };
+    if (mq.addEventListener) mq.addEventListener('change', showAll);
+  })();
+</script>
+</body>
+</html>
