@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis &amp; Team – Elb-Psychotherapie Hamburg-West</title>
+<meta name="description" content="Elb-Psychotherapie Hamburg-West – ein kleines Team approbierter Psychologischer Psychotherapeutinnen (Verhaltenstherapie) in hellen Praxisräumen in Hamburg-Nienstedten. Termine nach Vereinbarung, online buchbar.">
+<!-- TODO: noindex entfernen, sobald die Seite offiziell live geht (wie bei den anderen Entwürfen). -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf4ea">
+<style>
+  /* Schrift lokal eingebunden – keine Verbindung zu externen Servern.
+     Encode Sans hat eine Breitenachse: schmal für Logo und Überschriften (wie im Original), normal für Fließtext. */
+  @font-face {
+    font-family: "Encode Sans"; font-style: normal; font-weight: 100 900; font-stretch: 75% 125%; font-display: swap;
+    src: url("fonts/encode-sans-latin-standard-normal.woff2") format("woff2-variations"),
+         url("fonts/encode-sans-latin-standard-normal.woff2") format("woff2");
+  }
+
+  :root {
+    --bg: #faf4ea;           /* warmes Creme wie im Original */
+    --sand: #ecd6b8;         /* Sandkreis hinter dem Logo, Welle im Zitat */
+    --sand-soft: #f3e6d2;
+    --navy: #0e2752;         /* Hauptfarbe: Schrift, Welle, Zitatband */
+    --navy-hover: #0a1d3e;
+    --ink: #1c2a44;
+    --muted: #4c5a72;
+    --green: #1f5b2c;        /* Logo-Unterzeile und Balken */
+    --line: rgba(14, 39, 82, .14);
+    --head-h: 4.75rem;
+    --font: "Encode Sans", "Helvetica Neue", Arial, sans-serif;
+    --wrap: 72rem;
+    --gutter: clamp(1rem, 5vw, 3.5rem);
+    --section: clamp(4.5rem, 11vw, 8rem);
+    --radius: 1.25rem;
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--head-h) + 1rem); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1.0625rem;
+    font-weight: 350;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection { background: var(--navy); color: var(--bg); }
+  a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 2px; }
+  p { margin: 0 0 1em; }
+  p:last-child { margin-bottom: 0; }
+  h1, h2, h3 { margin: 0; font-weight: 400; font-stretch: 78%; color: var(--navy); text-wrap: balance; letter-spacing: -0.005em; }
+  img { max-width: 100%; }
+
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* Entwurfs-Hinweis */
+  .draft-bar {
+    background: var(--navy); color: #fff;
+    font-size: .8125rem; line-height: 1.4; text-align: center;
+    padding: .5rem var(--gutter);
+  }
+
+  /* Logo – nachgebaut aus Schrift und SVG-Welle */
+  .logo { display: inline-flex; flex-direction: column; align-items: flex-start; text-decoration: none; color: var(--navy); line-height: 1; }
+  .logo-elb { font-stretch: 75%; font-weight: 400; font-size: 2.6em; letter-spacing: .32em; margin-right: -.32em; line-height: .9; }
+  .logo-sub { font-stretch: 80%; font-size: .78em; color: var(--green); line-height: 1.15; margin-top: .35em; }
+  .logo-bar { display: block; width: 100%; height: .18em; background: var(--green); margin-top: .35em; }
+  .logo-wave { display: block; width: 100%; height: .6em; margin-top: .3em; color: var(--navy); }
+
+  /* Kopf */
+  .site-head { position: sticky; top: 0; z-index: 10; background: rgba(250, 244, 234, .92); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .site-head.is-scrolled { border-bottom-color: var(--line); }
+  .site-head .wrap { display: flex; align-items: center; gap: 1.25rem; min-height: var(--head-h); }
+  .site-head .logo { font-size: clamp(.78rem, 2.4vw, .9rem); flex-direction: row; align-items: center; gap: .9em; }
+  .site-head .logo-elb { font-size: 2.4em; }
+  .site-head .logo-text { display: flex; flex-direction: column; }
+  .site-head .logo-sub { margin-top: 0; font-size: .95em; white-space: nowrap; }
+  .site-head .logo-wave { width: 4.5em; height: .55em; margin-top: .25em; }
+  .site-nav { display: none; }
+  .head-cta { margin-left: auto; }
+  @media (min-width: 64rem) {
+    .site-nav { display: flex; gap: 1.6rem; margin-left: auto; font-size: .9375rem; font-stretch: 85%; font-weight: 450; }
+    .site-nav a { text-decoration: none; color: var(--navy); padding: .3rem 0;
+      background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; transition: background-size .5s var(--ease); }
+    .site-nav a:hover, .site-nav a[aria-current="page"] { background-size: 100% 1px; }
+    .head-cta { margin-left: .5rem; }
+  }
+
+  /* Mobiles Menü */
+  .menu { position: relative; }
+  .menu summary { list-style: none; cursor: pointer; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; color: var(--navy); }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu summary svg { width: 1.4rem; height: 1.4rem; }
+  .menu[open] summary .i-open, .menu:not([open]) summary .i-close { display: none; }
+  .menu-panel {
+    position: absolute; right: 0; top: calc(100% + .5rem); width: min(16rem, calc(100vw - 2rem));
+    background: #fff; border-radius: 1rem; padding: .5rem; box-shadow: 0 18px 50px -12px rgba(14, 39, 82, .28);
+    display: grid;
+  }
+  .menu-panel a { text-decoration: none; padding: .7rem 1rem; border-radius: .6rem; color: var(--navy); font-stretch: 85%; font-weight: 450; }
+  .menu-panel a:hover, .menu-panel a[aria-current="page"] { background: var(--sand-soft); }
+  @media (min-width: 64rem) { .menu { display: none; } }
+
+  /* Buttons – Pillenform wie im Original */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    min-height: 2.75rem; padding: .55rem 1.35rem; border-radius: 999px;
+    background: var(--navy); color: #fff;
+    font: inherit; font-stretch: 85%; font-weight: 500; font-size: .9375rem; line-height: 1.2; text-decoration: none; white-space: nowrap;
+    border: 1px solid var(--navy);
+    transition: background-color .2s, color .2s, border-color .2s;
+    user-select: none;
+  }
+  .btn:hover { background: var(--navy-hover); border-color: var(--navy-hover); }
+  .btn-line { background: transparent; color: var(--navy); }
+  .btn-line:hover { background: var(--navy); color: #fff; }
+  .btn-sm { min-height: 2.25rem; padding: .35rem 1.1rem; font-size: .875rem; }
+
+  /* Welle als Trenner */
+  .wave { display: block; width: 6.5rem; height: 1.4rem; margin: 0 auto; color: var(--navy); }
+  .divider { padding: var(--section) 0 0; }
+
+  /* Kurzer Balken unter Überschriften */
+  .rule { display: block; width: 3.5rem; height: 4px; background: var(--navy); margin: clamp(1.5rem, 3.5vw, 2.25rem) 0; border: 0; }
+
+  /* Start */
+  .intro { position: relative; isolation: isolate; padding-top: clamp(2.5rem, 7vw, 5rem); }
+  .intro::before {
+    /* Sandkreis aus dem Original, hier als ruhige Fläche hinter dem Text */
+    content: ""; position: absolute; z-index: -1; border-radius: 50%; background: var(--sand);
+    width: clamp(18rem, 48vw, 36rem); aspect-ratio: 1; left: calc(-1 * clamp(8rem, 18vw, 14rem)); top: calc(-1 * clamp(8rem, 16vw, 13rem)); opacity: .55;
+  }
+  .intro-grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  @media (min-width: 60rem) { .intro-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+  .kicker { margin: 0 0 1rem; font-size: .8125rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
+  .intro h1 { font-size: clamp(2.3rem, 6.2vw, 4rem); line-height: 1.05; letter-spacing: -0.015em; }
+  .intro-text { margin-top: clamp(1.25rem, 3vw, 1.75rem); max-width: 44ch; }
+  .intro-text p { color: var(--muted); }
+  .intro-text p:first-child { font-size: clamp(1.125rem, 2.4vw, 1.25rem); color: var(--ink); line-height: 1.6; }
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+  .intro-photo { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 2; background: var(--sand-soft); box-shadow: 0 30px 60px -30px rgba(14, 39, 82, .35); }
+  .intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (min-width: 60rem) { .intro-photo { aspect-ratio: 4 / 5; } }
+
+  /* Team-Haltung */
+  .together { padding-top: var(--section); }
+  .together-grid { display: grid; gap: clamp(1.5rem, 4vw, 3rem); }
+  @media (min-width: 60rem) { .together-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(2.5rem, 5vw, 5rem); } }
+  .together h2 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); line-height: 1.12; }
+  .together h2 span { display: block; color: var(--green); }
+  .together .rule { margin-bottom: 0; }
+  .together-text p { color: var(--muted); max-width: 62ch; }
+  .together-text p:first-child { color: var(--ink); font-size: clamp(1.0625rem, 2.2vw, 1.1875rem); }
+
+  .benefits { margin-top: clamp(2.5rem, 6vw, 4rem); background: #fff; border-radius: var(--radius); padding: clamp(1.75rem, 5vw, 3.25rem); box-shadow: 0 1px 0 var(--line); }
+  .benefits h3 { font-size: clamp(1.35rem, 3vw, 1.75rem); line-height: 1.2; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+  .benefits ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem 3rem; }
+  @media (min-width: 48rem) { .benefits ul { grid-template-columns: 1fr 1fr; } }
+  .benefits li { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: start; }
+  .benefits li svg { width: 2rem; height: .9rem; margin-top: .45rem; color: var(--navy); }
+
+  /* Team */
+  .team { padding-top: var(--section); }
+  .team-head { text-align: center; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .team-head h2 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); line-height: 1.1; }
+  .team-list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(2.75rem, 6vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem); }
+  @media (min-width: 44rem) { .team-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 64rem) { .team-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .member { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .portrait { width: min(15rem, 70vw); aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin: 0 0 1.5rem; background: var(--sand-soft); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Platzhalter für noch fehlende Porträts */
+  .portrait-ph { display: grid; place-items: center; background: var(--sand); }
+  .portrait-ph::after { content: "Platzhalter"; font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8a6a43; }
+  .member h3 { font-size: clamp(1.5rem, 3vw, 1.75rem); line-height: 1.15; }
+  .member p { flex: 1; margin-top: .5rem; font-size: .9375rem; line-height: 1.55; color: var(--muted); max-width: 26ch; }
+  .member .rule { width: 2.5rem; height: 3px; margin: 1.25rem auto; }
+
+  /* Zitat */
+  .quote { margin-top: var(--section); background: var(--navy); color: #fff; padding: clamp(4rem, 10vw, 6.5rem) 0; text-align: center; }
+  .quote blockquote { margin: 0 auto; max-width: 42ch; }
+  .quote blockquote p { font-stretch: 80%; text-wrap: balance; font-size: clamp(1.5rem, 3.8vw, 2.3rem); line-height: 1.3; color: #fff; }
+  .quote figcaption { margin-top: 1.25rem; font-size: .9375rem; letter-spacing: .08em; text-transform: uppercase; color: var(--sand); }
+  .quote .wave { color: var(--sand); margin-top: clamp(2rem, 5vw, 3rem); }
+
+  /* Fuß */
+  .site-foot { padding: clamp(3.5rem, 8vw, 5rem) 0 2rem; }
+  .foot-grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 48rem) { .foot-grid { grid-template-columns: auto 1fr minmax(16rem, 20rem); column-gap: clamp(2rem, 6vw, 6rem); align-items: start; } }
+  .site-foot .logo { font-size: 1.15rem; width: fit-content; justify-self: start; }
+  .site-foot .logo-wave { width: 0; min-width: 100%; } /* Welle so breit wie der Schriftzug, ohne ihn zu verbreitern */
+  .foot-nav { display: grid; gap: .35rem; font-stretch: 85%; font-weight: 450; color: var(--navy); }
+  .foot-nav a { text-decoration: none; width: fit-content; }
+  .foot-nav a:hover { text-decoration: underline; }
+  .foot-nav .sep { margin-top: .9rem; }
+  .foot-nav .legal { font-size: .875rem; }
+  .foot-cta { display: grid; gap: .7rem; }
+  .foot-cta .btn { width: 100%; }
+  .foot-cta p { margin-top: .5rem; font-size: .9375rem; color: var(--muted); }
+  .copyright { margin-top: clamp(2.5rem, 6vw, 3.5rem); padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
+
+  /* ---------- Bewegung ----------
+     Alles hier gilt nur, wenn keine reduzierte Bewegung eingestellt ist. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .btn { transition: background-color .25s, color .25s, border-color .25s, transform .4s var(--ease); }
+    .btn:active { transform: scale(.97); transition-duration: .08s; }
+
+    .intro h1, .intro-text, .chips, .intro .kicker { animation: rise 1.1s var(--ease) both; }
+    .intro .kicker { animation-delay: .05s; }
+    .intro h1 { animation-delay: .12s; }
+    .intro-text { animation-delay: .3s; }
+    .chips { animation-delay: .45s; }
+    .intro-photo { animation: settle 1.6s var(--ease) .1s both; }
+    .intro-photo img { animation: zoom 2.4s cubic-bezier(.22, 1, .36, 1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    @keyframes settle { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    @keyframes zoom { from { transform: scale(1.1); } to { transform: none; } }
+
+    .portrait img { transition: transform 1.2s var(--ease); }
+    @media (hover: hover) { .member:hover .portrait img { transform: scale(1.05); } }
+  }
+
+  /* Einblenden beim Scrollen (Script am Seitenende).
+     Die Klasse .reveal setzt nur das Script – ohne JavaScript oder bei
+     reduzierter Bewegung bleibt alles sofort sichtbar. */
+  .reveal [data-reveal] {
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .reveal [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(28px); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal [data-reveal], .reveal [data-reveal]:not(.is-in) { opacity: 1; transform: none; transition: none; }
+  }
+  @media print {
+    .site-head { position: static; }
+    .reveal [data-reveal] { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+<script>
+  // Früh setzen, damit nichts aufblitzt: nur mit Observer-Support und ohne reduzierte Bewegung
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reveal');
+  }
+</script>
+</head>
+<body>
+
+<div class="draft-bar" role="note">Entwurf – nicht die offizielle Website der Elb-Psychotherapie Hamburg-West</div>
+
+<!-- Welle einmal definieren, überall wiederverwenden -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wave" viewBox="0 0 120 24"><path d="M3 18c9 0 9-12 19-12s10 12 19 12 9-12 19-12 10 12 19 12 9-12 19-12 10 12 19 12" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="wave-sm" viewBox="0 0 40 14"><path d="M2 9c4 0 4-5 9-5s5 5 9 5 4-5 9-5 5 5 9 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#start" aria-label="Elb-Psychotherapie Hamburg-West – zum Seitenanfang">
+      <span class="logo-elb">ELB</span>
+      <span class="logo-text">
+        <span class="logo-sub">Psychotherapie<br>Hamburg-West</span>
+        <svg class="logo-wave" aria-hidden="true"><use href="#wave"/></svg>
+      </span>
+    </a>
+    <!-- TODO: Unterseiten (Leistungen, Ablauf, Kosten, Kontakt) nachbauen und hier verlinken. -->
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#start">Start</a>
+      <a href="#praxis" aria-current="page">Praxis &amp; Team</a>
+      <a href="#">Leistungen</a>
+      <a href="#">Ablauf</a>
+      <a href="#">Kosten</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <!-- TODO: Link zur Online-Terminbuchung einsetzen. -->
+    <a class="btn btn-sm head-cta" href="#">Termin buchen</a>
+    <details class="menu">
+      <summary aria-label="Menü">
+        <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </summary>
+      <nav class="menu-panel" aria-label="Hauptnavigation (mobil)">
+        <a href="#start">Start</a>
+        <a href="#praxis" aria-current="page">Praxis &amp; Team</a>
+        <a href="#">Leistungen</a>
+        <a href="#">Ablauf</a>
+        <a href="#">Kosten</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="start">
+
+  <section id="praxis" class="intro" aria-labelledby="intro-title">
+    <div class="wrap intro-grid">
+      <div>
+        <p class="kicker">Praxis &amp; Team</p>
+        <h1 id="intro-title">Ein Ort, an dem Sie sich gut aufgehoben fühlen.</h1>
+        <div class="intro-text">
+          <p>Unsere hellen und hyggelig gestalteten Praxisräume in einem diskreten Altbau in Hamburg-Nienstedten bieten einen geschützten Ort.</p>
+          <p>In einer vertrauensvollen und wertschätzenden therapeutischen Beziehung darf alles gesagt werden. Selbstverständlich unterliegen alle Gespräche der gesetzlichen Schweigepflicht.</p>
+        </div>
+        <!-- TODO: Ziele der beiden Buttons einsetzen (Seite „Selbstmitgefühl“ und Online-Terminbuchung). -->
+        <div class="chips">
+          <a class="btn" href="#">Termin buchen</a>
+          <a class="btn btn-line" href="#">Selbstmitgefühl</a>
+        </div>
+      </div>
+      <figure class="intro-photo">
+        <img src="img/praxis-1000.jpg" srcset="img/praxis-1000.jpg 1000w, img/praxis-2000.jpg 2000w" sizes="(min-width: 60rem) 55vw, 100vw"
+             alt="Weißer Altbau mit hellen Sprossenfenstern und Treppe zum Eingang, davor ein Vorgarten mit Hortensien und Gräsern"
+             width="1000" height="667" fetchpriority="high">
+      </figure>
+    </div>
+  </section>
+
+  <div class="divider"><svg class="wave" aria-hidden="true"><use href="#wave"/></svg></div>
+
+  <section class="together" aria-labelledby="together-title">
+    <div class="wrap">
+      <div class="together-grid">
+        <div>
+          <h2 id="together-title">Gemeinsam für Sie da: <span>Wir arbeiten nicht nebeneinander, sondern miteinander.</span></h2>
+          <hr class="rule">
+        </div>
+        <div class="together-text">
+          <p>Als kleines Team approbierter Psychologischer Psychotherapeutinnen tauschen wir uns regelmäßig fachlich aus und verstehen unterschiedliche Erfahrungen, Perspektiven und therapeutische Schwerpunkte als Bereicherung.</p>
+          <p>Unsere Zusammenarbeit ist geprägt von Wertschätzung, Vertrauen, Offenheit, gegenseitiger Unterstützung und Kreativität.</p>
+          <p>Uns verbindet eine gemeinsame therapeutische Haltung: wissenschaftlich fundiert, ressourcenorientiert und getragen von der Überzeugung, dass Entwicklung ein lebenslanger Prozess ist.</p>
+        </div>
+      </div>
+
+      <div class="benefits">
+        <h3>Davon profitieren unsere Patientinnen und Patienten:</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#wave-sm"/></svg><span>Sie treffen auf ein beständiges Team in einer Praxis mit verlässlichen Strukturen, in der Verantwortung gemeinsam getragen wird.</span></li>
+          <li><svg aria-hidden="true"><use href="#wave-sm"/></svg><span>Den therapeutischen Prozess gestalten wir mit Herz, Sorgfalt, Kreativität und Engagement.</span></li>
+          <li><svg aria-hidden="true"><use href="#wave-sm"/></svg><span>Uns berührt die Vielfalt menschlicher Erfahrungen ebenso wie das, was uns als Menschen verbindet.</span></li>
+          <li><svg aria-hidden="true"><use href="#wave-sm"/></svg><span>Diese Faszination und die Freude an unserer Arbeit inspirieren uns, unsere Praxis und unsere therapeutische Arbeit gemeinsam kontinuierlich weiterzuentwickeln.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><svg class="wave" aria-hidden="true"><use href="#wave"/></svg></div>
+
+  <section class="team" aria-labelledby="team-title">
+    <div class="wrap">
+      <div class="team-head">
+        <p class="kicker">Das Team</p>
+        <h2 id="team-title">Ihre Therapeutinnen</h2>
+      </div>
+      <!-- TODO: Porträtfotos in guter Auflösung einsetzen (Platzhalterflächen) und „Mehr“-Links auf die Profilseiten setzen. -->
+      <ul class="team-list">
+        <li class="member">
+          <div class="portrait portrait-ph" aria-hidden="true"></div>
+          <h3>Anna Laurila</h3>
+          <p>Diplom-Psychologin, Approbierte Psychologische Psychotherapeutin (Verhaltenstherapie)</p>
+          <hr class="rule">
+          <a class="btn btn-line btn-sm" href="#" aria-label="Mehr über Anna Laurila">Mehr</a>
+        </li>
+        <li class="member">
+          <div class="portrait portrait-ph" aria-hidden="true"></div>
+          <h3>Rebecca Pauly</h3>
+          <p>Master of Science Psychology, Approbierte Psychologische Psychotherapeutin (Verhaltenstherapie)</p>
+          <hr class="rule">
+          <a class="btn btn-line btn-sm" href="#" aria-label="Mehr über Rebecca Pauly">Mehr</a>
+        </li>
+        <li class="member">
+          <div class="portrait portrait-ph" aria-hidden="true"></div>
+          <h3>Charlotte Farmand</h3>
+          <p>Master of Science Psychology, Approbierte Psychologische Psychotherapeutin (Verhaltenstherapie)</p>
+          <hr class="rule">
+          <a class="btn btn-line btn-sm" href="#" aria-label="Mehr über Charlotte Farmand">Mehr</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="quote" aria-label="Zitat">
+    <div class="wrap">
+      <figure>
+        <blockquote><p>„Ohne Grundsätze ist der Mensch wie ein Schiff ohne Steuer und Kompass“</p></blockquote>
+        <figcaption>Samuel Smiles</figcaption>
+      </figure>
+      <svg class="wave" aria-hidden="true"><use href="#wave"/></svg>
+    </div>
+  </section>
+
+</main>
+
+<footer id="kontakt" class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="logo" href="#start" aria-label="Elb-Psychotherapie Hamburg-West – zum Seitenanfang">
+        <span class="logo-elb">ELB</span>
+        <span class="logo-sub">Psychotherapie<br>Hamburg-West</span>
+        <span class="logo-bar" aria-hidden="true"></span>
+        <svg class="logo-wave" aria-hidden="true"><use href="#wave"/></svg>
+      </a>
+      <nav class="foot-nav" aria-label="Seitenübersicht">
+        <a href="#start">Start</a>
+        <a href="#praxis">Praxis &amp; Team</a>
+        <a href="#">Leistungen</a>
+        <a href="#">Ablauf</a>
+        <a href="#">Kosten</a>
+        <a class="sep" href="#kontakt">Kontakt</a>
+        <a class="legal" href="impressum.html">Impressum</a>
+        <a class="legal" href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <div class="foot-cta">
+        <!-- TODO: Ziele der drei Buttons einsetzen. -->
+        <a class="btn btn-line" href="#">Privatsprechstunde</a>
+        <a class="btn btn-line" href="#">ADHS-Diagnostik</a>
+        <a class="btn" href="#">Termin buchen</a>
+        <p>Termine nur nach vorheriger Vereinbarung, online buchbar.<br>Wir freuen uns auf Sie!</p>
+      </div>
+    </div>
+    <p class="copyright">© 2026 · Elb-Psychotherapie Hamburg-West · Langelohstraße 13-15, 22609 Hamburg</p>
+  </div>
+</footer>
+
+<script>
+  // Linie unter dem Kopf erst nach dem Scrollen
+  (function () {
+    var head = document.querySelector('.site-head');
+    var onScroll = function () { head.classList.toggle('is-scrolled', window.scrollY > 8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Mobiles Menü nach Klick auf einen Eintrag schließen
+  (function () {
+    var menu = document.querySelector('.menu');
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) menu.removeAttribute('open'); });
+  })();
+
+  // Einblenden beim Scrollen
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('reveal')) return;
+
+    var targets = document.querySelectorAll('.together h2, .together-text p, .benefits, .team-head, .member, .quote figure, .divider .wave');
+    for (var i = 0; i < targets.length; i++) targets[i].setAttribute('data-reveal', '');
+
+    var STAGGER = 0.08;
+    var io = new IntersectionObserver(function (entries) {
+      var entering = entries.filter(function (e) { return e.isIntersecting; });
+      entering.sort(function (a, b) {
+        return (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left);
+      });
+      var rowTop = null, index = 0;
+      entering.forEach(function (entry) {
+        var top = entry.boundingClientRect.top;
+        if (rowTop === null || Math.abs(top - rowTop) > 8) { rowTop = top; index = 0; }
+        entry.target.style.setProperty('--reveal-delay', Math.min(index, 3) * STAGGER + 's');
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+        index++;
+      });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
+  })();
+</script>
+</body>
+</html>
