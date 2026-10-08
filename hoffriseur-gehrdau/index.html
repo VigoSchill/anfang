@@ -169,8 +169,14 @@
   .stars svg { width: .9rem; height: .9rem; }
 
   /* Fotos */
+  .placeholder { font-weight: 600; font-size: .875em; color: var(--accent); background: var(--tint); padding: .05em .35em; white-space: nowrap; }
   .frame { margin: 0; overflow: hidden; background: var(--tint); }
   .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Platzhalterflächen für noch fehlende Fotos */
+  .frame-ph { display: grid; place-items: center; background: #d9e0e4; }
+  .frame-ph::after { content: "Platzhalter"; font-size: .8125rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5a6c78; }
+  .contact-photo .frame.frame-ph { background: rgba(255, 255, 255, .16); }
+  .contact-photo .frame-ph::after { color: rgba(255, 255, 255, .75); }
   .photo { margin: 0; }
   .photo figcaption { margin-top: .7rem; font-size: .875rem; color: var(--muted); }
 
@@ -404,26 +410,21 @@
       <div class="sec-head">
         <h2 id="ueber-title">Über uns</h2>
         <ul class="facts">
-          <li><span>Salon</span><span>Damen und Herren</span></li>
+          <!-- TODO: Name des Inhabers und Datum „Inhaber seit“ eintragen. -->
+          <li><span>Inhaber</span><span class="placeholder">[PLATZHALTER]</span></li>
+          <li><span>Inhaber seit</span><span class="placeholder">[PLATZHALTER]</span></li>
           <li><span>Lage</span><span>Blankeneser Bahnhofstraße 11</span></li>
-          <li><span>Termine</span><span>telefonisch</span></li>
         </ul>
-        <figure class="frame sec-img">
-          <img src="img/bedienplaetze-414.jpg" alt="Heller Salonraum mit Holzboden, cognacfarbenen Frisierstühlen, Spiegeln an Holzkonsolen und Sonnenblumen in einer hohen Vase"
-               loading="lazy" width="414" height="414">
-        </figure>
+        <!-- TODO: Foto für „Über uns“ einsetzen (Platzhalterfläche). -->
+        <div class="frame sec-img frame-ph" aria-hidden="true"></div>
       </div>
       <div class="about-text">
-        <!-- TODO: Text zum Salon vom Inhaber bestätigen oder ergänzen lassen (z. B. Geschichte, Schwerpunkte, Team). Bewusst ohne Gründungsjahr, Titel und Namen formuliert. -->
-        <p class="about-lead">Ein Friseursalon mitten in Blankenese, an der Bahnhofstraße und nahe dem S-Bahnhof.</p>
-        <p>Bei uns sind Damen und Herren gleichermaßen willkommen. Im hellen Salon mit warmem Holz, Bildern an den Wänden und bequemen Plätzen am Waschbecken nehmen wir uns Zeit für ein Gespräch, bevor die Schere angesetzt wird.</p>
-        <p>Termine vergeben wir persönlich am Telefon. So können wir direkt besprechen, was Sie sich wünschen, und den passenden Zeitpunkt für Sie finden.</p>
-        <figure class="photo about-photo">
-          <div class="frame"><img src="img/urkunde-414.jpg" alt="Gerahmte Ehrenurkunde der Handwerkskammer Hamburg zum 25-jährigen Bestehen des Friseurbetriebes Stephan Gehrdau, datiert 13. Oktober 2022"
-               loading="lazy" width="414" height="414"></div>
-          <!-- TODO: Mit dem Inhaber klären, ob das Jubiläum (25 Jahre laut Urkunde von 2022) auch im Text genannt werden soll. -->
-          <figcaption>Ehrenurkunde der Handwerkskammer Hamburg</figcaption>
-        </figure>
+        <p class="about-lead">Ihr Friseur in Blankenese, für Damen und Herren. Wir schneiden, färben und beraten in der Blankeneser Bahnhofstraße, wenige Gehminuten vom S-Bahnhof.</p>
+        <p>Bei uns geht es ruhig zu. Wir hören erst zu und schneiden dann, und Sie gehen mit einer Frisur nach Hause, die auch am nächsten Morgen noch sitzt.</p>
+        <div class="photo about-photo">
+          <!-- TODO: Zweites Foto für „Über uns“ einsetzen (Platzhalterfläche). -->
+          <div class="frame frame-ph" aria-hidden="true"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -433,7 +434,8 @@
       <div class="sec-head">
         <h2 id="leistungen-title">Leistungen</h2>
         <figure class="frame sec-img">
-          <img src="img/waschplaetze-414.jpg" alt="Zwei Waschplätze mit weißen Becken und braunen Lederliegen, dahinter ein großes Gemälde an einer Natursteinwand"
+          <!-- TODO: Foto in höherer Auflösung nachliefern (aktuell 414 × 414 px). -->
+          <img src="img/produkte-414.jpg" alt="Glasregal in einem Holzrahmen mit weißen Pflegeprodukten, Föhn und Glätteisen"
                loading="lazy" width="414" height="414">
         </figure>
       </div>
@@ -465,18 +467,10 @@
           <h2 id="salon-title">Der Salon</h2>
         </div>
       </div>
-      <!-- TODO: Fotos in höherer Auflösung nachliefern (aktuell 414 × 414 px). -->
+      <!-- TODO: Fotos vom Salon einsetzen (Platzhalterflächen). -->
       <div class="gallery">
-        <figure class="photo g-a">
-          <div class="frame"><img src="img/gemaelde-414.jpg" alt="Gerahmtes Gemälde einer Strandlandschaft mit Dünen und Wolkenhimmel an einer hellen Natursteinwand"
-               loading="lazy" width="414" height="414"></div>
-          <figcaption>Kunst an der Natursteinwand</figcaption>
-        </figure>
-        <figure class="photo g-b">
-          <div class="frame"><img src="img/produkte-414.jpg" alt="Glasregal in einem Holzrahmen mit weißen Pflegeprodukten, Föhn und Glätteisen"
-               loading="lazy" width="414" height="414"></div>
-          <figcaption>Pflegeprodukte im Salon</figcaption>
-        </figure>
+        <div class="photo g-a"><div class="frame frame-ph" aria-hidden="true"></div></div>
+        <div class="photo g-b"><div class="frame frame-ph" aria-hidden="true"></div></div>
       </div>
     </div>
   </section>
@@ -504,11 +498,10 @@
         <a class="phone-big" href="tel:+494086663581">040 86 66 35 81</a>
         <p>Termine vergeben wir ausschließlich telefonisch. Rufen Sie uns während der Öffnungszeiten gern an.</p>
         <!-- TODO: E-Mail-Adresse ergänzen, falls vorhanden (sonst weglassen). -->
-        <figure class="photo contact-photo">
-          <div class="frame"><img src="img/eingang-414.jpg" alt="Weiße Eingangstür des Salons mit der Aufschrift Hoffriseur Stephan Gehrdau, Damen und Herren, und den Öffnungszeiten auf dem Glas"
-               loading="lazy" width="414" height="414"></div>
-          <figcaption>Unser Eingang an der Blankeneser Bahnhofstraße</figcaption>
-        </figure>
+        <div class="photo contact-photo">
+          <!-- TODO: Foto vom Eingang einsetzen (Platzhalterfläche). -->
+          <div class="frame frame-ph" aria-hidden="true"></div>
+        </div>
       </div>
       <div class="contact-meta">
         <div>
