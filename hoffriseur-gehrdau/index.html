@@ -172,6 +172,11 @@
   .placeholder { font-weight: 600; font-size: .875em; color: var(--accent); background: var(--tint); padding: .05em .35em; white-space: nowrap; }
   .frame { margin: 0; overflow: hidden; background: var(--tint); }
   .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Platzhalterflächen für noch fehlende Fotos */
+  .frame-ph { display: grid; place-items: center; background: #d9e0e4; }
+  .frame-ph::after { content: "Platzhalter"; font-size: .8125rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5a6c78; }
+  .contact-photo .frame.frame-ph { background: rgba(255, 255, 255, .16); }
+  .contact-photo .frame-ph::after { color: rgba(255, 255, 255, .75); }
   .photo { margin: 0; }
   .photo figcaption { margin-top: .7rem; font-size: .875rem; color: var(--muted); }
 
@@ -411,14 +416,14 @@
           <li><span>Lage</span><span>Blankeneser Bahnhofstraße 11</span></li>
         </ul>
         <!-- TODO: Foto für „Über uns“ einsetzen (Platzhalterfläche). -->
-        <div class="frame sec-img" aria-hidden="true"></div>
+        <div class="frame sec-img frame-ph" aria-hidden="true"></div>
       </div>
       <div class="about-text">
         <p class="about-lead">Ihr Friseur in Blankenese, für Damen und Herren. Wir schneiden, färben und beraten in der Blankeneser Bahnhofstraße, wenige Gehminuten vom S-Bahnhof.</p>
         <p>Bei uns geht es ruhig zu. Wir hören erst zu und schneiden dann, und Sie gehen mit einer Frisur nach Hause, die auch am nächsten Morgen noch sitzt.</p>
         <div class="photo about-photo">
           <!-- TODO: Zweites Foto für „Über uns“ einsetzen (Platzhalterfläche). -->
-          <div class="frame" aria-hidden="true"></div>
+          <div class="frame frame-ph" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -464,8 +469,8 @@
       </div>
       <!-- TODO: Fotos vom Salon einsetzen (Platzhalterflächen). -->
       <div class="gallery">
-        <div class="photo g-a"><div class="frame" aria-hidden="true"></div></div>
-        <div class="photo g-b"><div class="frame" aria-hidden="true"></div></div>
+        <div class="photo g-a"><div class="frame frame-ph" aria-hidden="true"></div></div>
+        <div class="photo g-b"><div class="frame frame-ph" aria-hidden="true"></div></div>
       </div>
     </div>
   </section>
@@ -495,7 +500,7 @@
         <!-- TODO: E-Mail-Adresse ergänzen, falls vorhanden (sonst weglassen). -->
         <div class="photo contact-photo">
           <!-- TODO: Foto vom Eingang einsetzen (Platzhalterfläche). -->
-          <div class="frame" aria-hidden="true"></div>
+          <div class="frame frame-ph" aria-hidden="true"></div>
         </div>
       </div>
       <div class="contact-meta">
